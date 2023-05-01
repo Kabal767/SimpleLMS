@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\ServiceProvider;
 use Laravel\Fortify\Contracts\LoginResponse as FortifyLoginResponse;
+use App\Http\Responses\LoginResponse as CustomResponse;
 use Laravel\Fortify\Fortify;
 
 class FortifyServiceProvider extends ServiceProvider
@@ -21,7 +22,7 @@ class FortifyServiceProvider extends ServiceProvider
     public function register(): void
     {
         //
-        // $this->app->instance(FortifyLoginResponse::class, new LoginResponse);
+        $this->app->instance(FortifyLoginResponse::class, new CustomResponse);
     }
 
     /**
