@@ -1,4 +1,4 @@
-<div class="box box-info padding-1">
+<div class=" bboxox-info padding-1">
     <div class="box-body p-2">
     </div>
     <div class="box-footer mt20">        

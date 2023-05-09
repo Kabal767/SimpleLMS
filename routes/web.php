@@ -24,6 +24,7 @@ Route::view('home', 'menus/mainMenu');
 //Rutas de alumnos y dependencias
 Route::resource('alumnos', App\Http\Controllers\AlumnoController::class);
 Route::get('alumnos/{alumno}/toDos', [App\Http\Controllers\AlumnoController::class, 'toDos']) ->name ('alumnos.toDos');
+Route::post('alumnos/{alumno}/toDos', [App\Http\Controllers\AlumnoController::class, 'addPending']) ->name('alumnos.addPending');
 
 //Rutas de exámenes
 Route::resource('exams', App\Http\Controllers\ExamController::class);

@@ -1,0 +1,18 @@
+Este documento contiene los pasos inmediatos a seguir con el desarrollo del proyeco.
+
+    1-Crear la tabla joint de alumnos-materias.
+        - La tabla debe contener las notas, la condición y el último año de cursado.
+        - Cada combinación materia alumno debe ser única.
+        - Las condiciiones son cursando | aprobado | pendiente.
+    2-Modificar el alumno controller para crear las relaciones.
+        - Modificar el store para crear una relación alumno-materia con todas las materias del curso elegido.
+        - Crear una función "pendiente" para registrar las materias pendientes de un alumno.
+        - Alumno_Materia 'CALLIFICATION' no tiene un valor "default", averiguar al respecto.
+
+    3-Modificar la vista ToDos para incluir una tabla con las materias pendientes, y un botón para añadir una nueva materia a la lista.
+
+    1-Consolidar vista "Alumnos.view" con la vista "Alumnos.toDos" ahora a llamarse "Alumnos.performance", también generar un crud para la vista "Alumnos.family"
+    2-La vista debe contener una cabecera con el nombre del alumno y una barra superior para cambiar entre los detalles del alumno.
+    3-La vista general debe mostrar todos los datos personales del alumno, además de los promedios de las materias que tenga en cursado.
+    4-Modificar la función alumno store para que genere columnas "joint" de todas las materias del curso al que se ha inscrito.
+    5-

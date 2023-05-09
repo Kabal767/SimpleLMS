@@ -65,6 +65,21 @@ class Alumno extends Model
     {
         return $this->hasOne('App\Models\Curso', 'id', 'id_Curso');
     }
-    
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function JointAlumnoMateria()
+    {
+        return $this->hasMany('App\Models\JointAlumnoMateria', 'id', 'id_Alumno');
+    }
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function materias()
+    {
+      return $this->belongsToMany('App\Models\Materia')
+        ->withPivot(['year', 'condition', 'callification'])
+      ;
+    }
 }

@@ -6,6 +6,7 @@ use App\Models\Alumno;
 use App\Models\Curso;
 use App\Models\Materia;
 use Illuminate\Http\Request;
+Use Carbon\Carbon;
 
 /**
  * Class AlumnoController
@@ -53,7 +54,7 @@ class AlumnoController extends Controller
         $alumno = Alumno::create($request->all());
 
         //return redirect()->route('alumnos.index')
-        return redirect()->route('alumnos.toDos', $alumno)
+        return redirect()->route('alumnos.toDos', ['alumno'=>$alumno->id])
             ->with('success', 'Alumno created successfully.');
     }
 
@@ -115,6 +116,27 @@ class AlumnoController extends Controller
 
     public function toDos($alumno)
     {
-        return view('alumno.toDos', compact('alumno'));
+        $alumno = Alumno::findOrFail($alumno);
+        $materias = Materia::All();
+        $year = Carbon::Now();
+        $date = date('y-m-d', strtotime($year));
+
+        return view('alumno.toDos', compact('alumno', 'materias', 'year', 'date'));
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request $request
+     * @param Alumno $alumno
+     * @return \Illuminate\Http\Response
+     */
+    public function addPending(Request $request, Alumno $alumno)
+    {
+        $alumno->materias()->attach($request->materia_id, ['year' => $request->date, 'condition' => 'pending']);
+
+        //return redirect()->route('alumnos.index')
+        return redirect()->route('alumnos.toDos', ['alumno'=>$alumno->id])
+            ->with('success', 'Materia pendiente añadida correctamente');
     }
 }

@@ -54,5 +54,16 @@ class Materia extends Model
         return $this->belongsToMany('App\Models\Curso');
     }
     
+    //Relation with alumnos
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function jointAlumnoMateria()
+    {
+        return $this->hasMany('App\Models\JointAlumnoMateria', 'id_Materia', 'id');
+    }
 
+    public function alumnos(){
+        return $this->belongsToMany('App\Models\Alumno');
+    }
 }
