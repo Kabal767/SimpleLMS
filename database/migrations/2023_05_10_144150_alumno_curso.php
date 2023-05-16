@@ -12,22 +12,17 @@ return new class extends Migration
     public function up(): void
     {
         //
-        Schema::create('exams', function (Blueprint $table) {
-            //Standard data
+        Schema::create('alumno_curso', function (Blueprint $table) {
             $table->engine="InnoDB";
             $table->bigIncrements('id');            
             $table->timestamps();
 
-            //Datos de examen
-            $table->date('date');
-            $table->enum('condition', ['Final', 'Diciembre', 'Marzo', 'Febrero']);
+            $table->enum('condition', ['cursando', 'promocionado']);
 
-            //Foreign data
-            $table->bigInteger('materia_id')->unsigned();
+            $table->bigInteger('alumno_id')->unsigned();
             $table->bigInteger('curso_id')->unsigned();
 
-            //Foreign logic
-            $table->foreign('materia_id')->references('id')->on('materias')->onDelete("cascade");
+            $table->foreign('alumno_id')->references('id')->on('alumnos')->onDelete("cascade");
             $table->foreign('curso_id')->references('id')->on('cursos')->onDelete("cascade");
         });
     }

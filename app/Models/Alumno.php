@@ -31,7 +31,7 @@ class Alumno extends Model
 		'DNI' => 'required',
 		'name' => 'required',
 		'lastName' => 'required',
-    'gender' => 'required',
+    'sex' => 'required',
     'birthDate' => 'required',
 
 		'tel' => 'required',
@@ -52,7 +52,7 @@ class Alumno extends Model
      *
      * @var array
      */
-    protected $fillable = ['DNI','name','lastName', 'gender', 'birthDate', 
+    protected $fillable = ['DNI','name','lastName', 'sex', 'birthDate', 
     'tel', 'locality', 'direction',
     'birthPlace','origin','nation',
     'id_Curso'];
@@ -79,7 +79,29 @@ class Alumno extends Model
     public function materias()
     {
       return $this->belongsToMany('App\Models\Materia')
-        ->withPivot(['year', 'condition', 'callification'])
+        ->withPivot(['year', 'origin', 'condition', 'callification','quarter1','quarter2','quarter3','average'])
       ;
+    }
+
+    /**
+     * The roles that belong to the Alumno
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function familiares()
+    {
+        return $this->belongsToMany('App\Models\Familiar')
+        ->withPivot(['relation']);
+    }
+
+    /**
+     * The roles that belong to the Alumno
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function cursos()
+    {
+        return $this->belongsToMany('App\Models\Curso')
+        ->withPivot(['condition']);
     }
 }

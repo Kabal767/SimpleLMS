@@ -10,6 +10,11 @@ use Illuminate\Database\Eloquent\Model;
  * @property $id
  * @property $created_at
  * @property $updated_at
+ * @property $origin
+ * @property $quarter1
+ * @property $quarter2
+ * @property $quarter3
+ * @property $average
  * @property $callification
  * @property $condition
  * @property $year
@@ -31,12 +36,11 @@ class JointCursoMaterium extends Model
     static $rules = [
 		'id_alumno' => 'required',
 		'id_materia' => 'required',
+        'origin' => 'required',
         'callification' => 'required',
         'condition' => 'required',
         'year' => 'required',
-    ];
-
-    
+    ];    
 
     protected $perPage = 20;
 
@@ -45,7 +49,7 @@ class JointCursoMaterium extends Model
      *
      * @var array
      */
-    protected $fillable = ['id_alumno','id_materia','callification','condition','year',];
+    protected $fillable = ['id_alumno','id_materia','callification','condition','year','origin'];
 
 
     /**

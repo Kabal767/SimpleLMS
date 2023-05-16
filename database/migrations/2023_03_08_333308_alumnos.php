@@ -22,7 +22,7 @@ return new class extends Migration
             $table->integer('DNI');
             $table->string('name');
             $table->string('lastName');
-            $table->string('gender');
+            $table->enum('sex', ['Masculino','Femenino']);
             $table->date('birthDate');
 
             //Datos de contacto

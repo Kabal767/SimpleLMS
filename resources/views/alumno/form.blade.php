@@ -8,11 +8,10 @@
             <input id="name" name="name" type="text" class="form-control" placeholder="Nombres" required>
             <input id="lastName" name="lastName" type="text" class="form-control" placeholder="Apellido" required>
             <input id="DNI" name="DNI" type="text" class="form-control" placeholder="DNI" required>
-            <select id="gender" name="gender" class="form-control" required>
+            <select id="sex" name="sex" class="form-control" required>
                 <option value="" selected> Seleccionar género </option>
-                <option value="M"> Masculino </option>
-                <option value="F"> Femenino </option>
-                <option value="O"> Otro </option>
+                <option value="Masculino"> Masculino </option>
+                <option value="Femenino"> Femenino </option>
             </select>
             <input id="birthDate" name="birthDate" type="date" class="form-control" placeholder="DNI" required>
 

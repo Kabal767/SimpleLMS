@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Alumno;
 use App\Models\Curso;
 use App\Models\Materia;
+use App\Models\Familiar;
 use Illuminate\Http\Request;
 Use Carbon\Carbon;
 
@@ -52,6 +53,19 @@ class AlumnoController extends Controller
         request()->validate(Alumno::$rules);
 
         $alumno = Alumno::create($request->all());
+        $curso = Curso::findOrFail($request->id_Curso);
+
+        //Get present year
+        $year = Carbon::Now();
+        $date = date('y', strtotime($year));
+
+        //Attach curso to student
+        $alumno->cursos()->attach($curso, ['condition' => 'cursando']);
+
+        //Attach curso materias to student
+        foreach($curso->materias as $materia){
+            $alumno->materias()->attach($materia->id, ['year' => $date, 'condition' => 'Cursando', 'origin' => $request->id_Curso]);
+        }
 
         //return redirect()->route('alumnos.index')
         return redirect()->route('alumnos.toDos', ['alumno'=>$alumno->id])
@@ -66,9 +80,11 @@ class AlumnoController extends Controller
      */
     public function show($id)
     {
-        $alumno = Alumno::find($id);
+        $alumno = Alumno::findOrFail($id);
+        $curso = Curso::findOrFail($alumno->id_curso);
+        $materias = $alumno->materias()->where('origin', $alumno->id_curso)->get();
 
-        return view('alumno.show', compact('alumno'));
+        return view('alumno.show', compact('alumno', 'curso', 'materias'));
     }
 
     /**
@@ -118,10 +134,12 @@ class AlumnoController extends Controller
     {
         $alumno = Alumno::findOrFail($alumno);
         $materias = Materia::All();
-        $year = Carbon::Now();
-        $date = date('y-m-d', strtotime($year));
+        $curso = Curso::findorFail($alumno->id_curso);
 
-        return view('alumno.toDos', compact('alumno', 'materias', 'year', 'date'));
+        $year = Carbon::Now();
+        $date = date('y', strtotime($year));
+
+        return view('alumno.toDos', compact('alumno', 'materias', 'year', 'date', 'curso'));
     }
 
     /**
@@ -133,10 +151,32 @@ class AlumnoController extends Controller
      */
     public function addPending(Request $request, Alumno $alumno)
     {
-        $alumno->materias()->attach($request->materia_id, ['year' => $request->date, 'condition' => 'pending']);
+        $alumno->materias()->attach($request->materia_id, ['year' => $request->date, 'condition' => 'Pendiente', 'origin' => 'pending']);
 
         //return redirect()->route('alumnos.index')
         return redirect()->route('alumnos.toDos', ['alumno'=>$alumno->id])
             ->with('success', 'Materia pendiente añadida correctamente');
+    }
+
+    public function family(Alumno $alumno){
+        $curso = Curso::findOrFail($alumno->id_curso);
+        $familiars = Familiar::All();
+
+        return view('alumno.family', compact('alumno', 'curso', 'familiars'));
+    }
+
+    /**
+     * Crear relación con un familiar
+     * 
+     * @param \Illuminate\Http\Request $request
+     * @param Alumno $alumno
+     * @return \Illuminate\Http\Response
+     */
+    public function addFamiliar(Request $request, Alumno $alumno)
+    {
+        $alumno->familiares()->attach($request->familiar_id, ['relation' => $request->relation]);
+
+        return redirect()->route('alumnos.family', ['alumno'=>$alumno->id])
+        ->with('succes', 'Relación con familiar creada exitósamente');
     }
 }

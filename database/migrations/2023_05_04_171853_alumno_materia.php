@@ -18,9 +18,15 @@ return new class extends Migration
             $table->engine="InnoDB";
             $table->bigIncrements('id');            
             $table->timestamps();
+
+            $table->string('origin');
+            $table->integer('quarter1')->default(0);
+            $table->integer('quarter2')->default(0);
+            $table->integer('quarter3')->default(0);
+            $table->integer('average')->default(0);
             $table->integer('callification')->default(0);
-            $table->enum('condition', ['coursing', 'pending', 'done'])->default('coursing');
-            $table->date('year')->default('2000-01-01');
+            $table->enum('condition', ['Cursando', 'Pendiente', 'Aprobada'])->default('Cursando');
+            $table->year('year');
 
             //Foreign keys
             $table->bigInteger('alumno_id')->unsigned();
