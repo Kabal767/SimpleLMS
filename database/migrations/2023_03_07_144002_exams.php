@@ -19,12 +19,11 @@ return new class extends Migration
             $table->timestamps();
 
             //Datos de examen
-            $table->date('date');
-            $table->enum('condition', ['Final', 'Diciembre', 'Marzo', 'Febrero']);
+            $table->enum('condition', ['Final', 'Diciembre', 'Regular', 'Adeudada'])->default('Final');
 
             //Foreign data
             $table->bigInteger('materia_id')->unsigned();
-            $table->bigInteger('curso_id')->unsigned();
+            $table->bigInteger('curso_id')->unsigned()->nullable($value = true);
 
             //Foreign logic
             $table->foreign('materia_id')->references('id')->on('materias')->onDelete("cascade");

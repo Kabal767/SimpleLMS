@@ -23,10 +23,10 @@ return new class extends Migration
             $table->date('Date');
 
             //Foreign data
-            $table->bigInteger('examns_id')->unsigned();
+            $table->bigInteger('id_exam')->unsigned();
 
             //Foreign logic
-            $table->foreign('examns_id')->references('id')->on('exams')->onDelete("cascade");
+            $table->foreign('id_exam')->references('id')->on('exams')->onDelete("cascade");
 
         });
     }

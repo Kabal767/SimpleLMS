@@ -24,7 +24,7 @@ class Mesa extends Model
     static $rules = [
 		'Proffesor' => 'required',
 		'Date' => 'required',
-		'id_exams' => 'required',
+		'id_exam' => 'required',
     ];
 
     protected $perPage = 20;
@@ -34,7 +34,7 @@ class Mesa extends Model
      *
      * @var array
      */
-    protected $fillable = ['Proffesor','Date','id_exams'];
+    protected $fillable = ['Proffesor','Date','id_exam'];
 
 
     /**

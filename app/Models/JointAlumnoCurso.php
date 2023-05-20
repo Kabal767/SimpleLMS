@@ -14,7 +14,7 @@
  *  @mixin \Illuminate\Database\Eloquent\Builder
  */
 
- class Curso extends Model
+ class JointAlumnoCurso extends Model
  {
     static $rules = [
         'condition' => 'required',

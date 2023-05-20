@@ -13,14 +13,11 @@
                         <div style="display: flex; justify-content: space-between; align-items: center;">
 
                             <span id="card_title">
-                                {{ __('Exam') }}
+                                Exámenes
                             </span>
 
-                             <div class="float-right">
-                                <a href="{{ route('exams.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
-                                  {{ __('Create New') }}
-                                </a>
-                              </div>
+                            @livewire('exams.exam-form', ['cursos' => $cursos, 'materias' => $materias])
+
                         </div>
                     </div>
                     @if ($message = Session::get('success'))
@@ -50,13 +47,18 @@
                                             <td>{{ ++$i }}</td>
                                             
 											<td>{{ $exam->date }}</td>
-											<td>{{ $exam->condición }}</td>
-											<td>{{ $exam->id_Materia }}</td>
-											<td>{{ $exam->id_Curso }}</td>
-
+											<td>{{ $exam->condition }}</td>
+											<td>{{ $exam->materia->Name }}</td>
+                                            <td>
+                                            @if($exam->curso == NULL)
+                                                -/-
+                                            @else
+                                                {{ $exam->curso->curso}}°{{ $exam->curso->div}} - Turno {{ $exam->curso->turno}}
+                                            @endif
+                                            </td>
                                             <td>
                                                 <form action="{{ route('exams.destroy',$exam->id) }}" method="POST">
-                                                    <a class="btn btn-sm btn-primary " href="{{ route('exams.show',$exam->id) }}"><i class="fa fa-fw fa-eye"></i> Show</a>
+                                                    <a class="btn btn-sm btn-primary " href="{{ route('exams.showMesas',$exam->id) }}"><i class="fa fa-fw fa-eye"></i> Show</a>
                                                     <a class="btn btn-sm btn-success" href="{{ route('exams.edit',$exam->id) }}"><i class="fa fa-fw fa-edit"></i> Edit</a>
                                                     @csrf
                                                     @method('DELETE')

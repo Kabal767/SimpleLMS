@@ -30,6 +30,13 @@ Route::get('alumnos/{alumno}/family', [App\Http\Controllers\AlumnoController::cl
 
 //Rutas de exámenes
 Route::resource('exams', App\Http\Controllers\ExamController::class);
+Route::get('exams/{exam}/mesas', [App\Http\Controllers\ExamController::class, 'showMesas']) -> name('exams.showMesas');
+    Route::post('exams/{exam}/mesas', [App\Http\Controllers\ExamController::class, 'addMesa']) -> name('exams.addMesa');    
+    Route::delete('exams/{exam}/{mesa}', [App\Http\Controllers\ExamController::class, 'eraseMesa']) -> name('exams.eraseMesa');
+    Route::post('exams/{exam}/alumnos', [App\Http\Controllers\ExamController::class, 'addAlumno']) -> name('exams.addAlumno');
+    Route::put('exams/{exam}/{alumno}', [App\Http\Controllers\ExamController::class, 'updateAlumno']) -> name('exams.updateAlumno');
+    Route::delete('exams/{exam}/{alumno}', [App\Http\Controllers\ExamController::class, 'eraseAlumno']) -> name('exams.eraseAlumno');
+
 
 //Rutas de materias
 Route::resource('materias', App\Http\Controllers\MateriaController::class);

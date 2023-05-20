@@ -18,7 +18,7 @@ use Illuminate\Database\Eloquent\Model;
  *  @mixin \Illuminate\Database\Eloquent\Builder
  */
 
- class Curso extends Model
+ class JointAlumnoFamiliar extends Model
  {
     static $rules = [
         'relation' => 'required',

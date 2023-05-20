@@ -6,14 +6,14 @@
 
 @section('content')
     <section class="content container-fluid">
-        <div class="row">
-            <div class="col-md-12">
+        <div class="row m-5">
+            <div class="col m-5">
 
                 @includeif('partials.errors')
 
-                <div class="card card-default">
+                <div class="card card-default m-5">
                     <div class="card-header">
-                        <span class="card-title">Create Exam</span>
+                        <span class="card-title m-3">Crear exámen</span>
                     </div>
                     <div class="card-body">
                         <form method="POST" action="{{ route('exams.store') }}"  role="form" enctype="multipart/form-data">

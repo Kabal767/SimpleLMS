@@ -12,19 +12,24 @@ return new class extends Migration
     public function up(): void
     {
         //
-        Schema::create('alumno_familiar', function (Blueprint $table) {
+        Schema::create('alumno_exam', function (Blueprint $table) {
             $table->engine="InnoDB";
             $table->bigIncrements('id');            
             $table->timestamps();
 
-            $table->enum('relation', ['Padre', 'Madre', 'Tutor', 'Abuelo', 'Abuela']);
+            $table->boolean('boolOral');
+            $table->integer('oral')->default(0);
+            $table->boolean('boolWritten');
+            $table->integer('written')->default(0);
+            $table->integer('callification')->default(0);
 
+            $table->bigInteger('mesa_id')->unsigned();
             $table->bigInteger('alumno_id')->unsigned();
-            $table->bigInteger('familiar_id')->unsigned();
+            $table->bigInteger('exam_id')->unsigned();
 
-            //Foreign logic
+            $table->foreign('mesa_id')->references('id')->on('mesas')->onDelete("cascade");
             $table->foreign('alumno_id')->references('id')->on('alumnos')->onDelete("cascade");
-            $table->foreign('familiar_id')->references('id')->on('familiars')->onDelete("cascade");
+            $table->foreign('exam_id')->references('id')->on('exams')->onDelete("cascade");
         });
     }
 

@@ -12,7 +12,7 @@
                     @foreach($cursos as $curso)
                     <option value="{{$curso->id}}"> {{$curso->curso}}°{{$curso->div}} - Turno {{$curso->turno}} </option>
                     @endforeach
-                    <option value="pendiente"> Pendiente </option>
+                    <option value="pending"> Pendiente </option>
                 </select>
             </div>
 
@@ -58,7 +58,13 @@
                     <td> {{$materia->pivot->quarter1}} </td>
                     <td> {{$materia->pivot->quarter2}} </td>
                     <td> {{$materia->pivot->quarter3}} </td>
-                    <td></td>
+                    <td> 
+                        @if($exams->where('materia_id',$materia->id)->first() == NULL)
+                        -/-
+                        @else
+                        N°{{$exams->where('materia_id',$materia->id)->first()->pivot->mesa_id}}
+                        @endif
+                    </td>
                     <td></td>
                     <td></td>
                     <td></td>

@@ -79,31 +79,11 @@
                         </div>
                     </form>
                     
-                    @livewire('to-dos-list', ['materias' => $alumno->materias, 'cursos' => $alumno->cursos, 'alumno' => $alumno->id])
+                    @livewire('to-dos-list', ['materias' => $alumno->materias, 'cursos' => $alumno->cursos, 'alumno' => $alumno->id, 'exams' => $alumno->exams])
 
-                    <!-- Lista de materias -->
-                    <div class="card card-default m-3">
-                        <div class="card-header">
-                            <h4>Materias pendientes</h4>
-                        </div>
-                      <div class="card-body">
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th> Nombre de materia </th>
-                                    <th> Condición </th>
-                                    <th> 1er Trimestre </th>
-                                    <th> 2do Trimestre </th>
-                                    <th> 3er Trimestre </th>
-                                    <th> Promedio </th>
-                                    <th> Calificación final </th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                            </tbody>
-                        </table>
-                      </div>
-                    </div>
+                </div>
+                <div class="card-footer">
+                    <a class="btn btn-primary ms-4" href="{{ route('alumnos.index') }}"> Regresar a la lista </a> 
                 </div>
             </div>
         </div>

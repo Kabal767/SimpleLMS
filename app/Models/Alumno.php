@@ -104,4 +104,15 @@ class Alumno extends Model
         return $this->belongsToMany('App\Models\Curso')
         ->withPivot(['condition']);
     }
+
+    /**
+     * The roles that belong to the Alumno
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function exams()
+    {
+        return $this->belongsToMany('App\Models\Exam')
+        ->withPivot(['oral','written','callification','mesa_id']);
+    }
 }

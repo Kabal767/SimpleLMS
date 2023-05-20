@@ -12,6 +12,7 @@ class toDosList extends Component
     public $materias;
     public $cursos;
     public $alumno;
+    public $exams;
     public $shownMaterias;
     public $selectedCurso;
 

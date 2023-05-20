@@ -10,10 +10,9 @@ use Illuminate\Database\Eloquent\Model;
  * @property $id
  * @property $created_at
  * @property $updated_at
- * @property $date
- * @property $condición
- * @property $id_Materia
- * @property $id_Curso
+ * @property $condition
+ * @property $materia_id
+ * @property $curso_id
  *
  * @property Curso $curso
  * @property Materia $materia
@@ -25,10 +24,9 @@ class Exam extends Model
 {
     
     static $rules = [
-		'date' => 'required',
-		'condición' => 'required',
-		'id_Materia' => 'required',
-		'id_Curso' => 'required',
+		'condition' => 'required',
+		'materia_id' => 'required',
+		'curso_id' => 'required',
     ];
 
     protected $perPage = 20;
@@ -38,7 +36,7 @@ class Exam extends Model
      *
      * @var array
      */
-    protected $fillable = ['date','condición','id_Materia','id_Curso'];
+    protected $fillable = ['condition','materia_id','curso_id'];
 
 
     /**
@@ -46,7 +44,7 @@ class Exam extends Model
      */
     public function curso()
     {
-        return $this->hasOne('App\Models\Curso', 'id', 'id_Curso');
+        return $this->hasOne('App\Models\Curso', 'id', 'curso_id');
     }
     
     /**
@@ -54,7 +52,7 @@ class Exam extends Model
      */
     public function materia()
     {
-        return $this->hasOne('App\Models\Materia', 'id', 'id_Materia');
+        return $this->hasOne('App\Models\Materia', 'id', 'materia_id');
     }
     
     /**
@@ -62,8 +60,17 @@ class Exam extends Model
      */
     public function mesas()
     {
-        return $this->hasMany('App\Models\Mesa', 'id_exams', 'id');
+        return $this->hasMany('App\Models\Mesa', 'id_exam', 'id');
     }
     
-
+    /**
+     * The roles that belong to the Exam
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function alumnos()
+    {
+        return $this->belongsToMany('App\Models\Alumno')
+        ->withPivot(['oral','written','callification','mesa_id', 'alumno_id','boolOral','boolWritten']);
+    }
 }

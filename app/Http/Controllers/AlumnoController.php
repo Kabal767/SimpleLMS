@@ -152,8 +152,7 @@ class AlumnoController extends Controller
     public function addPending(Request $request, Alumno $alumno)
     {
         $alumno->materias()->attach($request->materia_id, ['year' => $request->date, 'condition' => 'Pendiente', 'origin' => 'pending']);
-
-        //return redirect()->route('alumnos.index')
+        
         return redirect()->route('alumnos.toDos', ['alumno'=>$alumno->id])
             ->with('success', 'Materia pendiente añadida correctamente');
     }

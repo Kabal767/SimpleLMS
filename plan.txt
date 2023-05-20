@@ -8,4 +8,4 @@ Este documento contiene los pasos inmediatos a seguir con el desarrollo del proy
 
     IMPORTANTE:
 
-    Descubrir como usar livewire e indexes.
+    Descubrir como usar indexes.

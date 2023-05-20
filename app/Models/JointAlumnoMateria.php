@@ -26,7 +26,7 @@ use Illuminate\Database\Eloquent\Model;
  * @package App
  * @mixin \Illuminate\Database\Eloquent\Builder
  */
-class JointCursoMaterium extends Model
+class JointAlumnoMateria extends Model
 {
     protected $attributes = [
         'callification' => 0,

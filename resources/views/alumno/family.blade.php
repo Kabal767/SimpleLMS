@@ -123,6 +123,9 @@
                     </div>
 
                 </div>
+                <div class="card-footer">
+                    <a class="btn btn-primary ms-4" href="{{ route('alumnos.index') }}"> Regresar a la lista </a> 
+                </div>
             </div>
         </div>
 
