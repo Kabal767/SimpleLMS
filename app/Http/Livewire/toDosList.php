@@ -12,13 +12,11 @@ class toDosList extends Component
     public $materias;
     public $cursos;
     public $alumno;
-    public $exams;
     public $shownMaterias;
     public $selectedCurso;
 
-    public function mount($materias, $cursos, $alumno){
+    public function mount($materias, $cursos){
         $this->cursos = $cursos;
-        $this->alumno = Alumno::findOrFail($alumno);
 
         $this->selectedCurso = $this->alumno->id_curso;
     }

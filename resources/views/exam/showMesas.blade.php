@@ -36,7 +36,7 @@
                                 <th> N°Mesa </th>
                                 <th> Fecha</th>
                                 <th> Profesor </th>
-                                <th colspan="2"> Acciones </th>
+                                <th> Acciones </th>
                             </tr>
                         </thead>
                         <tbody>

@@ -55,10 +55,10 @@
                                             <td>{{ ++$i }}</td>
                                             
 											<td>{{ $alumno->DNI }}</td>
-											<td>{{ $alumno->Nombre }}</td>
-											<td>{{ $alumno->Apellido }}</td>
+											<td>{{ $alumno->name }}</td>
+											<td>{{ $alumno->lastName }}</td>
 											<td>{{ $alumno->tel }}</td>
-											<td>{{ $alumno->Dirección }}</td>
+											<td>{{ $alumno->direction }}</td>
 											<td>{{ $alumno->birthPlace }}</td>
 											<td>{{ $alumno->origin }}</td>
 											<td>{{ $alumno->nation }}</td>

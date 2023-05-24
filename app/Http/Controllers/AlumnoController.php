@@ -139,6 +139,9 @@ class AlumnoController extends Controller
         $year = Carbon::Now();
         $date = date('y', strtotime($year));
 
+        //Exam querys
+        //$finalQuery = DB::('alumno_exam')->where('')
+
         return view('alumno.toDos', compact('alumno', 'materias', 'year', 'date', 'curso'));
     }
 
@@ -177,5 +180,14 @@ class AlumnoController extends Controller
 
         return redirect()->route('alumnos.family', ['alumno'=>$alumno->id])
         ->with('succes', 'Relación con familiar creada exitósamente');
+    }
+
+    public function updateMateria(Request $request, Alumno $alumno, $materia){
+        $average = ($request->q1 + $request->q2 + $request->q3) / 3;
+
+        $alumno->materias()->updateExistingPivot($materia, ['quarter1' => $request->q1, 'quarter2' => $request->q2, 'quarter3' => $request->q3, 
+        'average' => $average, 'callification' => $request->callification]);
+
+        return redirect()->route('alumnos.toDos', ['alumno'=>$alumno->id]);
     }
 }

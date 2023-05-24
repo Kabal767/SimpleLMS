@@ -44,9 +44,9 @@ use Illuminate\Database\Eloquent\Model;
     /**
      * The roles that belong to the Familiar
      *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function alumnos(): BelongsToMany
+    public function alumnos()
     {
         return $this->belongsToMany('App\Models\Alumno')
         ->withPivot(['relation']);

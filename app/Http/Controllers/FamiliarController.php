@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Familiar;
+use App\Models\Alumno;
 use Illuminate\Http\Request;
 
 /**
@@ -18,10 +19,9 @@ class FamiliarController extends Controller
      */
     public function index()
     {
-        $familiars = Familiar::paginate();
+        $familiars = Familiar::all();
 
-        return view('familiar.index', compact('familiars'))
-            ->with('i', (request()->input('page', 1) - 1) * $familiars->perPage());
+        return view('familiar.index', compact('familiars'));
     }
 
     /**
@@ -47,7 +47,7 @@ class FamiliarController extends Controller
 
         $familiar = Familiar::create($request->all());
 
-        return redirect()->route('familiar.index')
+        return redirect()->route('familiars.index')
             ->with('success', 'Familiar añadido al sistema exitosamente');
     }
 
@@ -57,9 +57,11 @@ class FamiliarController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Familiar $id)
+    public function show(Familiar $familiar)
     {
-        return view('familiar.show', compact('familiar'));
+        $alumnos = Alumno::all();
+
+        return view('familiar.show', compact('familiar','alumnos'));
     }
 
     /**
@@ -68,7 +70,7 @@ class FamiliarController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Familiar $id)
+    public function edit(Familiar $familiar)
     {
         return view('familiar.edit', compact('familiar'));
     }
@@ -82,12 +84,12 @@ class FamiliarController extends Controller
      */
     public function update(Request $request, Familiar $familiar)
     {
-        request()->validate(Familiar::$familiar);
+        request()->validate(Familiar::$rules);
 
         $familiar->update($request->all());
 
-        return redirect()->route('familiar.index')
-            ->with('success', 'Materia updated successfully');
+        return redirect()->route('familiars.index')
+            ->with('success', 'Familiar ' . $familiar->DNI . ' modificado exitosamente!');
     }
 
     /**
@@ -95,11 +97,29 @@ class FamiliarController extends Controller
      * @return \Illuminate\Http\RedirectResponse
      * @throws \Exception
      */
-    public function destroy(Familiar $id)
+    public function destroy($id)
     {
         $familiar = Familiar::find($id)->delete();
 
-        return redirect()->route('familiar.index')
-            ->with('success', 'Materia deleted successfully');
+        return redirect()->route('familiars.index')
+            ->with('success', 'Familiar eliminado exitosamente');
+    }
+
+    public function attachAlumno(Request $request, Familiar $familiar){
+        $familiar->alumnos()->attach($request->alumno, ['relation' => $request->relation]);
+
+        return redirect()->route('familiars.show', ['familiar'=>$familiar->id]);
+    }
+
+    public function updateAlumno(Request $request, Familiar $familiar, Alumno $alumno){
+        $familiar->alumnos()->updateExistingPivot($alumno, ['relation' => $request->relation]);
+
+        return redirect()->route('familiars.show', ['familiar'=>$familiar->id]);
+    }
+
+    public function detachAlumno(Familiar $familiar, $alumno){
+        $familiar->alumnos()->detach($alumno);
+        
+        return redirect()->route('familiars.show', ['familiar'=>$familiar->id]);
     }
 }

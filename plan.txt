@@ -1,11 +1,5 @@
 Este documento contiene los pasos inmediatos a seguir con el desarrollo del proyeco.
 
-    1-Crear tabla joint entre alumnos y cursos;
-    2-Añadir una columna origen a "alumno_materia" para declarar el origen de la origen de la relación ('Pendiente', [id_curso]);
-    3-Actualizar vista "toDos" para tener en una lista de tablas las materias organizadas por curso, seguidas de la tabla "pendientes";
-    4-Añadir el botón para retroceder.
-
-
     IMPORTANTE:
 
     Descubrir como usar indexes.

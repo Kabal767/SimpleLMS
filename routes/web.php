@@ -25,6 +25,7 @@ Route::view('home', 'menus/mainMenu');
 Route::resource('alumnos', App\Http\Controllers\AlumnoController::class);
 Route::get('alumnos/{alumno}/toDos', [App\Http\Controllers\AlumnoController::class, 'toDos']) ->name ('alumnos.toDos');
     Route::post('alumnos/{alumno}/toDos', [App\Http\Controllers\AlumnoController::class, 'addPending']) ->name('alumnos.addPending');
+    Route::put('alumnos/{alumno}/{materia}', [App\Http\Controllers\AlumnoController::class, 'updateMateria']) ->name('alumnos.updateMateria');
 Route::get('alumnos/{alumno}/family', [App\Http\Controllers\AlumnoController::class, 'family']) ->name ('alumnos.family');
     Route::post('alumnos/{alumno}/family', [App\Http\Controllers\AlumnoController::class, 'addFamiliar']) ->name ('alumnos.addFamiliar');
 
@@ -46,4 +47,7 @@ Route::resource('cursos', App\Http\Controllers\CursoController::class);
 
 //Rutas de familiares
 Route::resource('familiars', App\Http\Controllers\FamiliarController::class);
+    Route::post('familiars/{familiar}', [App\Http\Controllers\FamiliarController::class, 'attachAlumno']) -> name ('familiars.attachAlumno');
+    Route::put('familiars/{familiar}/{alumno}', [App\Http\Controllers\FamiliarController::class, 'updateAlumno']) -> name ('familiars.updateAlumno');
+    Route::delete('familiars/{familiar}/{alumno}', [App\Http\Controllers\FamiliarController::class, 'detachAlumno']) -> name('familiars.detachAlumno');
 

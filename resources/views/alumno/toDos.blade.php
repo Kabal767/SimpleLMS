@@ -79,7 +79,7 @@
                         </div>
                     </form>
                     
-                    @livewire('to-dos-list', ['materias' => $alumno->materias, 'cursos' => $alumno->cursos, 'alumno' => $alumno->id, 'exams' => $alumno->exams])
+                    @livewire('to-dos-list', ['materias' => $alumno->materias, 'cursos' => $alumno->cursos, 'alumno' => $alumno])
 
                 </div>
                 <div class="card-footer">
