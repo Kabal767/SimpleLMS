@@ -34,7 +34,6 @@ return new class extends Migration
             $table->string('birthPlace');
             $table->string('origin');
             $table->string('nation');
-            //[PENDIENTE] foreign id to Joint table Alumno-Familiar
 
             //Curso [Foreign data]
             $table->bigInteger('id_curso')->unsigned();

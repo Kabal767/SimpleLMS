@@ -1,5 +1,11 @@
 Este documento contiene los pasos inmediatos a seguir con el desarrollo del proyeco.
 
+    1. Aprender a utilizar indexes para evitar relaciones redundantes.
+    2. Revisar reglas para evitar generar cursos redundantes.
+    3. Mover claves primarias de ID a DNI donde sea posible.
+    4. Añadir trabas en los formularios del frontend para evitar errores.
+    5. Bloquear las vistas detrás del inicio de sesión. X 
+
     IMPORTANTE:
 
     Descubrir como usar indexes.

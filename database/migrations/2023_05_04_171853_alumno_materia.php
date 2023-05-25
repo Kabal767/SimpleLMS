@@ -15,8 +15,7 @@ return new class extends Migration
         //This is a JUNCTION TABLE
         Schema::create('alumno_materia', function (Blueprint $table) {
             //Standard data
-            $table->engine="InnoDB";
-            $table->bigIncrements('id');            
+            $table->engine="InnoDB";          
             $table->timestamps();
 
             $table->string('origin');
@@ -31,10 +30,13 @@ return new class extends Migration
             //Foreign keys
             $table->bigInteger('alumno_id')->unsigned();
             $table->bigInteger('materia_id')->unsigned();
+            
+            $table->primary(['alumno_id','materia_id']);
 
             //Foreign logic
             $table->foreign('alumno_id')->references('id')->on('alumnos')->onDelete("cascade");
             $table->foreign('materia_id')->references('id')->on('materias')->onDelete("cascade");
+
         });
     }
 
