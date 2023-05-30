@@ -53,7 +53,7 @@
             <tbody>
                 @foreach($shownMaterias as $materia)
                 <tr>
-                    <th scope="row"> {{$materia->Name}} </th>
+                    <th scope="row"> {{$materia->name}} </th>
                     <td> {{$materia->pivot->condition}} </td>
                     <td> {{$materia->pivot->quarter1}} </td>
                     <td> {{$materia->pivot->quarter2}} </td>
@@ -93,7 +93,7 @@
                     <td> <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal{{$materia->id}}"> Modificar </button> </td>
 
                     <div class="modal fade modal-lg" id="modal{{$materia->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <form method="POST" action="{{ route('alumnos.updateMateria', [$alumno->id, $materia->id]) }}"  role="form" enctype="multipart/form-data">
+                        <form method="POST" action="{{ route('alumnos.updateMateria', [$alumno->DNI, $materia->id]) }}"  role="form" enctype="multipart/form-data">
                         {{ method_field('PUT') }}
                         @csrf
                         <div class="modal-dialog modal-dialog-centered">

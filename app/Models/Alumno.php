@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * Class Alumno
  *
- * @property $id
  * @property $created_at
  * @property $updated_at
  * @property $DNI
@@ -26,9 +25,11 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Alumno extends Model
 {
+    protected $primaryKey = 'DNI';
+    public $incrementing  = false;
     
     static $rules = [
-		'DNI' => 'required',
+		'DNI' => 'required|unique:alumnos,DNI',
 		'name' => 'required',
 		'lastName' => 'required',
     'sex' => 'required',
@@ -101,7 +102,7 @@ class Alumno extends Model
      */
     public function cursos()
     {
-        return $this->belongsToMany('App\Models\Curso')
+        return $this->belongsToMany('App\Models\Curso', 'alumno_curso', 'alumno_DNI', 'curso_id')
         ->withPivot(['condition']);
     }
 
@@ -112,7 +113,7 @@ class Alumno extends Model
      */
     public function exams()
     {
-        return $this->belongsToMany('App\Models\Exam')
+        return $this->belongsToMany('App\Models\Exam', 'alumno_exam', 'alumno_DNI', 'exam_id')
         ->withPivot(['oral','written','callification','mesa_id']);
     }
 }

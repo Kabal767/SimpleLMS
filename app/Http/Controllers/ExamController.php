@@ -65,7 +65,7 @@ class ExamController extends Controller
             $alumnos = Alumno::where('id_curso', $exam->curso_id)->get();
 
             foreach($alumnos as $alumno){
-                $exam->alumnos()->attach($alumno->id, ['mesa_id' => $mesa->id, 'boolOral' => true, 'boolWritten' => true]);
+                $exam->alumnos()->attach($alumno->DNI, ['mesa_id' => $mesa->id, 'boolOral' => true, 'boolWritten' => true]);
             }
         }
 
@@ -162,7 +162,7 @@ class ExamController extends Controller
 
     public function addAlumno(Request $request, Exam $exam)
     {
-        $exam->alumnos()->attach($request->alumno_id, ['mesa_id' => $request->mesa_id, 'boolOral' => true, 'boolWritten' => true]);        
+        $exam->alumnos()->attach($request->alumno_DNI, ['mesa_id' => $request->mesa_id, 'boolOral' => true, 'boolWritten' => true]);        
 
         return redirect()->route('exams.showMesas', ['exam'=>$exam->id]);
     }

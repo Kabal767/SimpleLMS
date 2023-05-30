@@ -70,7 +70,7 @@ class Exam extends Model
      */
     public function alumnos()
     {
-        return $this->belongsToMany('App\Models\Alumno')
-        ->withPivot(['oral','written','callification','mesa_id', 'alumno_id','boolOral','boolWritten']);
+        return $this->belongsToMany('App\Models\Alumno', 'alumno_exam', 'exam_id', 'alumno_DNI')
+        ->withPivot(['oral','written','callification','mesa_id', 'alumno_DNI','boolOral','boolWritten']);
     }
 }

@@ -21,7 +21,7 @@ class Materia extends Model
 {
     
     static $rules = [
-		'Name' => 'required',
+		'name' => 'required', 'unique'
     ];
 
     protected $perPage = 20;
@@ -31,7 +31,7 @@ class Materia extends Model
      *
      * @var array
      */
-    protected $fillable = ['Name'];
+    protected $fillable = ['name'];
 
 
     /**

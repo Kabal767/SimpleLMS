@@ -51,7 +51,7 @@
                     class="select2"
                     data-style="btn-primary" title="Seleccionar Materias" multiple aria-label="materia select" required> 
                         @foreach ($materias as $materia)
-                            <option value="{{ $materia->id }}"> {{ $materia->Name }} </option>
+                            <option value="{{ $materia->id }}"> {{ $materia->name }} </option>
                         @endforeach
                     </select>
                 </div>

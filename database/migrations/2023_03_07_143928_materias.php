@@ -19,7 +19,10 @@ return new class extends Migration
             $table->timestamps();
 
             //Datos de materia
-            $table->string('Name');
+            $table->string('name');
+
+            //Indexes
+            $table->unique('name');
 
         });
     }

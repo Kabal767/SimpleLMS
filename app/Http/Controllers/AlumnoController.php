@@ -67,8 +67,7 @@ class AlumnoController extends Controller
             $alumno->materias()->attach($materia->id, ['year' => $date, 'condition' => 'Cursando', 'origin' => $request->id_Curso]);
         }
 
-        //return redirect()->route('alumnos.index')
-        return redirect()->route('alumnos.toDos', ['alumno'=>$alumno->id])
+        return redirect()->route('alumnos.toDos', ['alumno'=>$alumno->DNI])
             ->with('success', 'Alumno created successfully.');
     }
 
@@ -156,7 +155,7 @@ class AlumnoController extends Controller
     {
         $alumno->materias()->syncWithoutDetaching([$request->materia_id => ['year' => $request->date, 'condition' => 'Pendiente', 'origin' => 'pending']]);
         
-        return redirect()->route('alumnos.toDos', ['alumno'=>$alumno->id])
+        return redirect()->route('alumnos.toDos', ['alumno'=>$alumno->DNI])
             ->with('success', 'Materia pendiente añadida correctamente');
     }
 
@@ -178,7 +177,7 @@ class AlumnoController extends Controller
     {
         $alumno->familiares()->attach($request->familiar_id, ['relation' => $request->relation]);
 
-        return redirect()->route('alumnos.family', ['alumno'=>$alumno->id])
+        return redirect()->route('alumnos.family', ['alumno'=>$alumno->DNI])
         ->with('succes', 'Relación con familiar creada exitósamente');
     }
 
@@ -188,6 +187,6 @@ class AlumnoController extends Controller
         $alumno->materias()->updateExistingPivot($materia, ['quarter1' => $request->q1, 'quarter2' => $request->q2, 'quarter3' => $request->q3, 
         'average' => $average, 'callification' => $request->callification]);
 
-        return redirect()->route('alumnos.toDos', ['alumno'=>$alumno->id]);
+        return redirect()->route('alumnos.toDos', ['alumno'=>$alumno->DNI]);
     }
 }

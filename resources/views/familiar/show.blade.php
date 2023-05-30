@@ -114,7 +114,7 @@
 
                                                 <td>
                                                     
-                                                    <form action="{{ route('familiars.detachAlumno',[$familiar->id, $alumno->id]) }}" method="POST">
+                                                    <form action="{{ route('familiars.detachAlumno',[$familiar->id, $alumno->DNI]) }}" method="POST">
                                                         @csrf
                                                         @method('DELETE')
                                                         <button type="submit" class="btn btn-danger"> Borrar relación </button>

@@ -8,8 +8,8 @@
         <!-- Hader with links to more details -->
         <div class="col-12 align-self-center text-center m-1">
             <div class="btn-group">
-                <a class="btn btn-primary" href="{{route('alumnos.show', $alumno->id)}}"> Datos personales </a>
-                <a class="btn btn-primary" href="{{route('alumnos.toDos', $alumno->id)}}"> Desempeño académico </a>
+                <a class="btn btn-primary" href="{{route('alumnos.show', $alumno->DNI)}}"> Datos personales </a>
+                <a class="btn btn-primary" href="{{route('alumnos.toDos', $alumno->DNI)}}"> Desempeño académico </a>
                 <a class="btn btn-primary disabled" href=""> Familiares </a>
             </div>
         </div>
@@ -42,15 +42,9 @@
 
                 <div class="card-body">
                     <!-- Small form to add new pending materias -->
-                    <form method="POST" action="{{ route('alumnos.addFamiliar', $alumno->id) }}"  role="form" enctype="multipart/form-data">
+                    <form method="POST" action="{{ route('alumnos.addFamiliar', $alumno->DNI) }}"  role="form" enctype="multipart/form-data">
                         @csrf
-                        <div class="row g-3 align-items-center">
-
-                            <!-- ID Alumno -->
-                            <div class="col-auto">
-                            <label for="alumno_id" class="col-form-label">ID de Alumno</label> </div>
-                            <div class="col-auto">
-                            <input type="text" id="alumno_id" name="alumno_id" class="form-control" aria-label="alumno_id" value="{{$alumno->id}}" disabled> </div>
+                        <div class="row g-3 align-items-center ms-3">
 
                             <!-- Lista de familiares -->
                             <div class="col-auto">

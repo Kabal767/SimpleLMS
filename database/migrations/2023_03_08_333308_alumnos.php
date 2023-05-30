@@ -14,19 +14,18 @@ return new class extends Migration
         //
         Schema::create('alumnos', function (Blueprint $table) {
             //Standard data
-            $table->engine="InnoDB";
-            $table->bigIncrements('id');            
+            $table->engine="InnoDB";          
             $table->timestamps();
 
             //Alumno data
-            $table->integer('DNI');
+            $table->bigInteger('DNI')->unsigned();
             $table->string('name');
             $table->string('lastName');
             $table->enum('sex', ['Masculino','Femenino']);
             $table->date('birthDate');
 
             //Datos de contacto
-            $table->bigInteger('tel');
+            $table->bigInteger('tel')->unsigned();
             $table->string('locality');
             $table->string('direction');
 
@@ -37,6 +36,8 @@ return new class extends Migration
 
             //Curso [Foreign data]
             $table->bigInteger('id_curso')->unsigned();
+
+            $table->primary('DNI');
 
             //Foreign logic
             $table->foreign('id_curso')->references('id')->on('cursos')->onDelete("cascade");

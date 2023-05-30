@@ -28,13 +28,13 @@ return new class extends Migration
             $table->year('year');
 
             //Foreign keys
-            $table->bigInteger('alumno_id')->unsigned();
+            $table->bigInteger('alumno_DNI')->unsigned();
             $table->bigInteger('materia_id')->unsigned();
             
-            $table->primary(['alumno_id','materia_id']);
+            $table->primary(['alumno_DNI','materia_id']);
 
             //Foreign logic
-            $table->foreign('alumno_id')->references('id')->on('alumnos')->onDelete("cascade");
+            $table->foreign('alumno_DNI')->references('DNI')->on('alumnos')->onDelete("cascade");
             $table->foreign('materia_id')->references('id')->on('materias')->onDelete("cascade");
 
         });

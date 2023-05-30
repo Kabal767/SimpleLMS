@@ -12,8 +12,8 @@
             <div class="col-12 align-self-center text-center m-1">
                 <div class="btn-group">
                     <a class="btn btn-primary disabled" href=""> Datos personales </a>
-                    <a class="btn btn-primary" href="{{route('alumnos.toDos', $alumno->id)}}"> Desempeño académico </a>
-                    <a class="btn btn-primary" href="{{route('alumnos.family', $alumno->id)}}"> Familiares </a>
+                    <a class="btn btn-primary" href="{{route('alumnos.toDos', $alumno->DNI)}}"> Desempeño académico </a>
+                    <a class="btn btn-primary" href="{{route('alumnos.family', $alumno->DNI)}}"> Familiares </a>
                 </div>
             </div>
 
@@ -87,7 +87,7 @@
                                         <li class="list-group-item">
                                             <ul class="list-group list-group m-2">
                                                 @foreach($materias as $materia)
-                                                <li class="list-group-item list-group-item-primary">{{$materia->Name}}: {{$materia->pivot->callification}}</li>
+                                                <li class="list-group-item list-group-item-primary">{{$materia->name}}: {{$materia->pivot->callification}}</li>
                                                 @endforeach
                                             </ul>
                                         </li>

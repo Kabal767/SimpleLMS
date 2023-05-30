@@ -65,9 +65,9 @@
 											<td>{{ $alumno->id_Curso }}</td>
 
                                             <td>
-                                                <form action="{{ route('alumnos.destroy',$alumno->id) }}" method="POST">
-                                                    <a class="btn btn-sm btn-primary " href="{{ route('alumnos.show',$alumno->id) }}"><i class="fa fa-fw fa-eye"></i> Show</a>
-                                                    <a class="btn btn-sm btn-success" href="{{ route('alumnos.edit',$alumno->id) }}"><i class="fa fa-fw fa-edit"></i> Edit</a>
+                                                <form action="{{ route('alumnos.destroy',$alumno->DNI) }}" method="POST">
+                                                    <a class="btn btn-sm btn-primary " href="{{ route('alumnos.show',$alumno->DNI) }}"><i class="fa fa-fw fa-eye"></i> Show</a>
+                                                    <a class="btn btn-sm btn-success" href="{{ route('alumnos.edit',$alumno->DNI) }}"><i class="fa fa-fw fa-edit"></i> Edit</a>
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i> Delete</button>

@@ -19,10 +19,10 @@ return new class extends Migration
 
             $table->enum('condition', ['cursando', 'promocionado']);
 
-            $table->bigInteger('alumno_id')->unsigned();
+            $table->bigInteger('alumno_DNI')->unsigned();
             $table->bigInteger('curso_id')->unsigned();
 
-            $table->foreign('alumno_id')->references('id')->on('alumnos')->onDelete("cascade");
+            $table->foreign('alumno_DNI')->references('DNI')->on('alumnos')->onDelete("cascade");
             $table->foreign('curso_id')->references('id')->on('cursos')->onDelete("cascade");
         });
     }

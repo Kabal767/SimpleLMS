@@ -12,7 +12,7 @@
     <div class="col-12 align-self-center text-center m-1">
         <div class="btn-group">
             <a class="btn btn-primary" href="#"> Condición: {{$exam->condition}} </a>
-            <a class="btn btn-primary" href="#"> Materia: {{$exam->materia->Name}} </a>            
+            <a class="btn btn-primary" href="#"> Materia: {{$exam->materia->name}} </a>            
             <a class="btn btn-primary" href="#"> Curso: 
                 @if($exam->curso != NULL)
                 {{$exam->curso->curso}}°{{$exam->curso->div}} - Turno {{$exam->curso->turno}} 
@@ -95,16 +95,16 @@
                                 <td> {{$alumno->pivot->oral}} </td>
                                 <td> {{$alumno->pivot->written}} </td>
                                 <td> {{$alumno->pivot->callification}}</td>
-                                <td> <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal{{$alumno->id}}"> Modificar </button> </td>
+                                <td> <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal{{$alumno->DNI}}"> Modificar </button> </td>
                                 <td> 
-                                    <form action="{{ route('exams.eraseAlumno',[$exam->id, $alumno->id]) }}" method="POST">
+                                    <form action="{{ route('exams.eraseAlumno',[$exam->id, $alumno->DNI]) }}" method="POST">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="btn btn-danger"> Borrar </button>
+                                    <button type="submit" class="btn btn-danger"> Borrar Alumno </button>
                                     </form>                                
                                
-                                <div class="modal fade" id="modal{{$alumno->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                    <form method="POST" action="{{ route('exams.updateAlumno', [$exam->id, $alumno->id]) }}"  role="form" enctype="multipart/form-data">
+                                <div class="modal fade" id="modal{{$alumno->DNI}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <form method="POST" action="{{ route('exams.updateAlumno', [$exam->id, $alumno->DNI]) }}"  role="form" enctype="multipart/form-data">
                                     {{ method_field('PUT') }}
                                     @csrf
                                     <div class="modal-dialog">
@@ -157,10 +157,10 @@
                                 <form method="POST" action="{{ route('exams.addAlumno', $exam->id) }}"  role="form" enctype="multipart/form-data">
                                     @csrf
                                     <td colspan="2"> 
-                                        <select class="form-select" id="alumno_id" name="alumno_id">
+                                        <select class="form-select" id="alumno_DNI" name="alumno_DNI">
                                             <option selected> Escoger alumno </option>
                                             @foreach($alumnos as $alumno)
-                                            <option value="{{$alumno->id}}"> {{$alumno->id}} {{$alumno->name}} {{$alumno->lastName}}</option>
+                                            <option value="{{$alumno->DNI}}"> {{$alumno->DNI}} {{$alumno->name}} {{$alumno->lastName}}</option>
                                             @endforeach
 
                                         </select>

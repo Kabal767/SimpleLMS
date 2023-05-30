@@ -9,7 +9,7 @@
             <select class="form-select" id="alumno" name="alumno" placeholder="filtro" required>
                 <option selected> Seleccionar alumno </option>
                 @foreach($alumnos as $alumno)
-                <option value="{{$alumno->id}}"> {{$alumno->name}} {{$alumno->lastName}} - {{$alumno->DNI}} </option>
+                <option value="{{$alumno->DNI}}"> {{$alumno->name}} {{$alumno->lastName}} - {{$alumno->DNI}} </option>
                 @endforeach
             </select>
             

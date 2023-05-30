@@ -19,8 +19,7 @@ use Illuminate\Database\Eloquent\Model;
  * @mixin \Illuminate\Database\Eloquent\Builder
  */
 class Mesa extends Model
-{
-    
+{    
     static $rules = [
 		'Proffesor' => 'required',
 		'Date' => 'required',

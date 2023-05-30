@@ -3,7 +3,7 @@
         
         <div class="form-group">
             {{ Form::label('Name') }}
-            {{ Form::text('Name', $materia->Name, ['class' => 'form-control' . ($errors->has('Name') ? ' is-invalid' : ''), 'placeholder' => 'Name']) }}
+            {{ Form::text('Name', $materia->Name, ['class' => 'form-control' . ($errors->has('name') ? ' is-invalid' : ''), 'placeholder' => 'Name']) }}
             {!! $errors->first('Name', '<div class="invalid-feedback">:message</div>') !!}
         </div>
 

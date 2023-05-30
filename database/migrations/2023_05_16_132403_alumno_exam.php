@@ -24,11 +24,11 @@ return new class extends Migration
             $table->integer('callification')->default(0);
 
             $table->bigInteger('mesa_id')->unsigned();
-            $table->bigInteger('alumno_id')->unsigned();
+            $table->bigInteger('alumno_DNI')->unsigned();
             $table->bigInteger('exam_id')->unsigned();
 
             $table->foreign('mesa_id')->references('id')->on('mesas')->onDelete("cascade");
-            $table->foreign('alumno_id')->references('id')->on('alumnos')->onDelete("cascade");
+            $table->foreign('alumno_DNI')->references('DNI')->on('alumnos')->onDelete("cascade");
             $table->foreign('exam_id')->references('id')->on('exams')->onDelete("cascade");
         });
     }

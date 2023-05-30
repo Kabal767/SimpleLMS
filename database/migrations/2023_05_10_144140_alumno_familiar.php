@@ -19,11 +19,11 @@ return new class extends Migration
 
             $table->enum('relation', ['Padre', 'Madre', 'Tutor', 'Abuelo', 'Abuela']);
 
-            $table->bigInteger('alumno_id')->unsigned();
+            $table->bigInteger('alumno_DNI')->unsigned();
             $table->bigInteger('familiar_id')->unsigned();
 
             //Foreign logic
-            $table->foreign('alumno_id')->references('id')->on('alumnos')->onDelete("cascade");
+            $table->foreign('alumno_DNI')->references('DNI')->on('alumnos')->onDelete("cascade");
             $table->foreign('familiar_id')->references('id')->on('familiars')->onDelete("cascade");
         });
     }

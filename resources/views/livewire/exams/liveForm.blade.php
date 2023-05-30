@@ -28,7 +28,7 @@
                 <select class="form-select form-select" name="id_materia" id="id_materia">
                     <option selected>Escoger materia</option>
                     @foreach($materias as $materia)
-                    <option value="{{$materia->id}}"> {{$materia->Name}} </option>
+                    <option value="{{$materia->id}}"> {{$materia->name}} </option>
                     @endforeach
                 </select>
             </div>

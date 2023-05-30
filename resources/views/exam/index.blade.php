@@ -48,7 +48,7 @@
                                             
 											<td>{{ $exam->date }}</td>
 											<td>{{ $exam->condition }}</td>
-											<td>{{ $exam->materia->Name }}</td>
+											<td>{{ $exam->materia->name }}</td>
                                             <td>
                                             @if($exam->curso == NULL)
                                                 -/-
