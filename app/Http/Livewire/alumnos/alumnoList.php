@@ -21,7 +21,8 @@ class alumnoList extends Component
 
         $alumnos = Alumno::where('name', 'like', '%' . $this->searchInput . '%')->
         orWhere('lastName', 'like', '%' . $this->searchInput . '%')->
-        orWhere('DNI', 'like', '%' . $this->searchInput . '%')->get();
+        orWhere('DNI', 'like', '%' . $this->searchInput . '%')->
+        orderBy($this->orderBy, $this->orderIn)->get();
 
         if($this->selectedCurso !== ""){
         $this->shownAlumnos = $alumnos->where('id_curso',$this->selectedCurso);}

@@ -19,10 +19,9 @@ class CursoController extends Controller
      */
     public function index()
     {
-        $cursos = Curso::paginate();
+        $cursos = Curso::all();
 
-        return view('curso.index', compact('cursos'))
-            ->with('i', (request()->input('page', 1) - 1) * $cursos->perPage());
+        return view('curso.index', compact('cursos'));
     }
 
     /**
