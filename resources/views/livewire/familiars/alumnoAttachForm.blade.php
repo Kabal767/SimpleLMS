@@ -1,6 +1,6 @@
 <div>
 
-    <form method="POST" action="{{ route('familiars.attachAlumno', $familiar->id)}}">
+    <form method="POST" action="{{ route('familiars.attachAlumno', $familiar->DNI)}}">
         @csrf
         <div class="input-group mb-2">
             

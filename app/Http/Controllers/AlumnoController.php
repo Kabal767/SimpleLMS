@@ -8,6 +8,7 @@ use App\Models\Materia;
 use App\Models\Familiar;
 use Illuminate\Http\Request;
 Use Carbon\Carbon;
+use App\Http\Requests\AlumnoFormRequest;
 
 /**
  * Class AlumnoController
@@ -22,10 +23,10 @@ class AlumnoController extends Controller
      */
     public function index()
     {
-        $alumnos = Alumno::paginate();
+        $alumnos = Alumno::all();
+        $cursos = Curso::all();
 
-        return view('alumno.index', compact('alumnos'))
-            ->with('i', (request()->input('page', 1) - 1) * $alumnos->perPage());
+        return view('alumno.index', compact('alumnos', 'cursos'));
     }
 
     /**
@@ -48,12 +49,12 @@ class AlumnoController extends Controller
      * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(AlumnoFormRequest $request)
     {
-        request()->validate(Alumno::$rules);
+        $request = $request->validated();
 
-        $alumno = Alumno::create($request->all());
-        $curso = Curso::findOrFail($request->id_Curso);
+        $alumno = Alumno::create($request);
+        $curso = Curso::findOrFail($request['id_curso']);
 
         //Get present year
         $year = Carbon::Now();
@@ -64,7 +65,7 @@ class AlumnoController extends Controller
 
         //Attach curso materias to student
         foreach($curso->materias as $materia){
-            $alumno->materias()->attach($materia->id, ['year' => $date, 'condition' => 'Cursando', 'origin' => $request->id_Curso]);
+            $alumno->materias()->attach($materia->id, ['year' => $date, 'condition' => 'Cursando', 'origin' => $request['id_curso']]);
         }
 
         return redirect()->route('alumnos.toDos', ['alumno'=>$alumno->DNI])
@@ -106,11 +107,11 @@ class AlumnoController extends Controller
      * @param  Alumno $alumno
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Alumno $alumno)
+    public function update(AlumnoFormRequest $request, Alumno $alumno)
     {
-        request()->validate(Alumno::$rules);
+        $request = $request->validated();
 
-        $alumno->update($request->all());
+        $alumno->update($request);
 
         return redirect()->route('alumnos.index')
             ->with('success', 'Alumno updated successfully');
@@ -175,7 +176,7 @@ class AlumnoController extends Controller
      */
     public function addFamiliar(Request $request, Alumno $alumno)
     {
-        $alumno->familiares()->attach($request->familiar_id, ['relation' => $request->relation]);
+        $alumno->familiares()->attach($request->familiar_DNI, ['relation' => $request->relation]);
 
         return redirect()->route('alumnos.family', ['alumno'=>$alumno->DNI])
         ->with('succes', 'Relación con familiar creada exitósamente');

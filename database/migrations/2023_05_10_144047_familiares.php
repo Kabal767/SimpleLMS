@@ -13,17 +13,19 @@ return new class extends Migration
     {
         //
         Schema::create('familiars', function (Blueprint $table) {
-            $table->engine="InnoDB";
-            $table->bigIncrements('id');            
+            $table->engine="InnoDB";         
             $table->timestamps();
 
-            $table->bigInteger('DNI');
+            $table->bigInteger('DNI')->unsigned();
             $table->string('names');
             $table->string('lastName');
             $table->bigInteger('tel');
             $table->string('direction');
             $table->string('nation');
             $table->string('mail')->nullabe($value=true);
+
+            //Primary key
+            $table->primary('DNI');
         });
     }
 

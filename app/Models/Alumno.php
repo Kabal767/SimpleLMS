@@ -17,7 +17,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property $birthPlace
  * @property $origin
  * @property $nation
- * @property $id_Curso
+ * @property $id_curso
  *
  * @property Curso $curso
  * @package App
@@ -43,7 +43,7 @@ class Alumno extends Model
 		'origin' => 'required',
 		'nation' => 'required',
 
-		'id_Curso' => 'required',
+		'id_curso' => 'required',
     ];
 
     protected $perPage = 20;
@@ -56,7 +56,7 @@ class Alumno extends Model
     protected $fillable = ['DNI','name','lastName', 'sex', 'birthDate', 
     'tel', 'locality', 'direction',
     'birthPlace','origin','nation',
-    'id_Curso'];
+    'id_curso'];
 
 
     /**
@@ -64,7 +64,7 @@ class Alumno extends Model
      */
     public function curso()
     {
-        return $this->hasOne('App\Models\Curso', 'id', 'id_Curso');
+        return $this->hasOne('App\Models\Curso', 'id', 'id_curso');
     }
 
     /**
@@ -91,7 +91,7 @@ class Alumno extends Model
      */
     public function familiares()
     {
-        return $this->belongsToMany('App\Models\Familiar')
+        return $this->belongsToMany('App\Models\Familiar', 'alumno_familiar', 'alumno_DNI', 'familiar_DNI')
         ->withPivot(['relation']);
     }
 

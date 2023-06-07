@@ -3,11 +3,13 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 
 /**
  *  Class Familiar
  * 
- *  @property $id
  *  @property $created_at
  *  @property $updated_at
  *  @property $DNI
@@ -24,8 +26,10 @@ use Illuminate\Database\Eloquent\Model;
 
  class Familiar extends Model
  {
+    protected $primaryKey = 'DNI';
+    public $incrementing  = false;
+
     static $rules = [
-        'DNI' => 'required',
         'names' => 'required',
         'lastName' => 'required',
         'tel' => 'required',
@@ -48,7 +52,7 @@ use Illuminate\Database\Eloquent\Model;
      */
     public function alumnos()
     {
-        return $this->belongsToMany('App\Models\Alumno')
+        return $this->belongsToMany('App\Models\Alumno','alumno_familiar','familiar_DNI','alumno_DNI')
         ->withPivot(['relation']);
     }
  }

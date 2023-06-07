@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Familiar;
 use App\Models\Alumno;
 use Illuminate\Http\Request;
+use App\Http\Requests\FamiliarFormRequest;
 
 /**
  * Class MateriaController
@@ -41,11 +42,11 @@ class FamiliarController extends Controller
      * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(FamiliarFormRequest $request)
     {
-        request()->validate(Familiar::$rules);
+        $request = $request->validated();
 
-        $familiar = Familiar::create($request->all());
+        $familiar = Familiar::create($request);
 
         return redirect()->route('familiars.index')
             ->with('success', 'Familiar añadido al sistema exitosamente');
@@ -82,11 +83,11 @@ class FamiliarController extends Controller
      * @param  Familiar $familiar
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Familiar $familiar)
+    public function update(FamiliarFormRequest $request, Familiar $familiar)
     {
-        request()->validate(Familiar::$rules);
+        $request = $request->validated();
 
-        $familiar->update($request->all());
+        $familiar->update($request);
 
         return redirect()->route('familiars.index')
             ->with('success', 'Familiar ' . $familiar->DNI . ' modificado exitosamente!');
@@ -108,18 +109,18 @@ class FamiliarController extends Controller
     public function attachAlumno(Request $request, Familiar $familiar){
         $familiar->alumnos()->attach($request->alumno, ['relation' => $request->relation]);
 
-        return redirect()->route('familiars.show', ['familiar'=>$familiar->id]);
+        return redirect()->route('familiars.show', ['familiar'=>$familiar->DNI]);
     }
 
     public function updateAlumno(Request $request, Familiar $familiar, Alumno $alumno){
         $familiar->alumnos()->updateExistingPivot($alumno, ['relation' => $request->relation]);
 
-        return redirect()->route('familiars.show', ['familiar'=>$familiar->id]);
+        return redirect()->route('familiars.show', ['familiar'=>$familiar->DNI]);
     }
 
     public function detachAlumno(Familiar $familiar, $alumno){
         $familiar->alumnos()->detach($alumno);
         
-        return redirect()->route('familiars.show', ['familiar'=>$familiar->id]);
+        return redirect()->route('familiars.show', ['familiar'=>$familiar->DNI]);
     }
 }

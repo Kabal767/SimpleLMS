@@ -92,51 +92,7 @@
                     <td> {{$materia->pivot->callification}} </td>
                     <td> <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal{{$materia->id}}"> Modificar </button> </td>
 
-                    <div class="modal fade modal-lg" id="modal{{$materia->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <form method="POST" action="{{ route('alumnos.updateMateria', [$alumno->DNI, $materia->id]) }}"  role="form" enctype="multipart/form-data">
-                        {{ method_field('PUT') }}
-                        @csrf
-                        <div class="modal-dialog modal-dialog-centered">
-                        <div class="modal-content">
-
-                            <div class="modal-header">
-                                <div class="col-6"><h1 class="modal-title fs-5" id="exampleModalLabel"> Alumno: {{$alumno->name}} {{$alumno->lastName}} </h1></div>
-                                <div class="col-5"><h1 class="modal-title fs-5" id="exampleModalLabel"> Materia: {{$materia->Name}} </h1></div>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                    <div class="row">
-                                        <div class="col-auto">
-                                            <label for="q1" class="form-label"> Primer trimestre </label>
-                                            <input type="number" class="form-control" name="q1" id="q1" value="{{$materia->pivot->quarter1}}">
-                                        </div>
-
-                                        <div class="col-auto">
-                                            <label for="q2" class="form-label"> Segundo trimestre</label>
-                                            <input type="number" class="form-control" name="q2" id="q2" value="{{$materia->pivot->quarter2}}">
-                                        </div>
-
-                                        <div class="col-auto">
-                                            <label for="q3" class="form-label"> Tercer trimestre </label>
-                                            <input type="number" class="form-control" name="q3" id="q3" value="{{$materia->pivot->quarter3}}">
-                                        </div>
-
-                                        <div class="col-auto">
-                                            <label for="callification" class="form-label"> Calificación final </label>
-                                            <input type="number" class="form-control" name="callification" id="callification" value="{{$materia->pivot->callification}}">
-                                        </div>
-                                    </div>
-                            </div>
-                            <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary">Save changes</button>
-                            </div>
-                        </div>
-                        </div>
-                        
-                
-                        </form>
-                    </div>
+                    
 
                 </tr>
                 @endforeach
@@ -144,5 +100,54 @@
         </table>
     </div>
 </div>
+
+<!-- MODALS -->
+@foreach($alumno->materias as $materia)
+<div  class="modal fade modal-lg" id="modal{{$materia->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <form method="POST" action="{{ route('alumnos.updateMateria', [$alumno->DNI, $materia->id]) }}"  role="form" enctype="multipart/form-data">
+    {{ method_field('PUT') }}
+    @csrf
+    <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+
+        <div class="modal-header">
+            <div class="col-6"><h1 class="modal-title fs-5" id="exampleModalLabel"> Alumno: {{$alumno->name}} {{$alumno->lastName}} </h1></div>
+            <div class="col-5"><h1 class="modal-title fs-5" id="exampleModalLabel"> Materia: {{$materia->name}} </h1></div>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+                <div class="row">
+                    <div class="col-auto">
+                        <label for="q1" class="form-label"> Primer trimestre </label>
+                        <input type="number" class="form-control" name="q1" id="q1" value="{{$materia->pivot->quarter1}}">
+                    </div>
+
+                    <div class="col-auto">
+                        <label for="q2" class="form-label"> Segundo trimestre</label>
+                        <input type="number" class="form-control" name="q2" id="q2" value="{{$materia->pivot->quarter2}}">
+                    </div>
+
+                    <div class="col-auto">
+                        <label for="q3" class="form-label"> Tercer trimestre </label>
+                        <input type="number" class="form-control" name="q3" id="q3" value="{{$materia->pivot->quarter3}}">
+                    </div>
+
+                    <div class="col-auto">
+                        <label for="callification" class="form-label"> Calificación final </label>
+                        <input type="number" class="form-control" name="callification" id="callification" value="{{$materia->pivot->callification}}">
+                    </div>
+                </div>
+        </div>
+        <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Save changes</button>
+        </div>
+    </div>
+    </div>
+    
+
+    </form>
+</div>
+@endforeach
 
 </div>

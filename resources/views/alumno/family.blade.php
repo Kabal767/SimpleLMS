@@ -50,10 +50,10 @@
                             <div class="col-auto">
                             <label for="familiar_id" class="col-form-label"> Nombre del Familiar</label></div>
                             <div class="col-auto">
-                                <select class="form-select" name="familiar_id" id="familiar_id" aria-label="Default select example">
+                                <select class="form-select" name="familiar_DNI" id="familiar_DNI" aria-label="Default select example">
                                     <option selected>Seleccionar familiar</option>
                                     @foreach($familiars as $familiar)
-                                        <option value="{{$familiar->id}}"> DNI:{{$familiar->DNI}}-{{$familiar->names}} {{$familiar->lastName}} </option>
+                                        <option value="{{$familiar->DNI}}"> DNI:{{$familiar->DNI}}-{{$familiar->names}} {{$familiar->lastName}} </option>
                                     @endforeach
                                 </select>
                             </div>

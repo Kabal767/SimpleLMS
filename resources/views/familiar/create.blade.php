@@ -27,22 +27,40 @@
                                     <li class="list-group-item active fw-bold"> Datos personales </li>                                    
                                     <li class="list-group-item">
     
+                                        
                                         <div class="input-group mb-3">                                            
-                                            <span class="input-group-text" id="basic-addon1"> DNI </span>
-                                            <input type="number" class="form-control" name="DNI" id="DNI" placeholder="DNI">     
+                                            <span class="input-group-text" id="basic-addon1"> *DNI </span>
+                                            <input type="number" class="form-control @error('DNI') is-invalid @enderror" name="DNI" id="DNI" placeholder="DNI"
+                                            value="{{old('DNI')}}" required>
                                         </div>
-    
+                                        @error('DNI')
+                                            <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror 
+
+
                                         <div class="input-group mb-3">                                            
-                                            <span class="input-group-text" id="basic-addon1"> Nombre completo </span>
-                                            <input type="text" class="form-control" name="names" id="names" placeholder="Nombres"> 
-                                            <input type="text" class="form-control" name="lastName" id="lastName" placeholder="Apellido">   
+                                            <span class="input-group-text" id="basic-addon1"> *Nombre completo </span>
+                                            <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" id="name" placeholder="Nombres"
+                                            value="{{old('names')}}" required> 
+                                            <input type="text" class="form-control @error('lastName') is-invalid @enderror" name="lastName" id="lastName" placeholder="Apellido"
+                                            value="{{old('lastName')}}" required>   
                                         </div>
+                                        @error('name')
+                                            <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror 
+                                        @error('lastName')
+                                            <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror 
     
                                         <div class="input-group mb-3">                                         
-                                            <span class="input-group-text" id="basic-addon1"> Nacionalidad </span>                                            
-                                            <input type="text" class="form-control" name="nation" id="nation" placeholder="Nacionalidad"> 
+                                            <span class="input-group-text" id="basic-addon1"> *Nacionalidad </span>                                            
+                                            <input type="text" class="form-control @error('nation') is-invalid @enderror" name="nation" id="nation" placeholder="Nacionalidad"
+                                            value="{{old('nation')}}" required> 
                                         </div>
-    
+                                        @error('nation')
+                                            <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror 
+
                                     </li>
                                 </ul>
                             </div>
@@ -53,19 +71,32 @@
                                     <li class="list-group-item">
     
                                         <div class="input-group mb-3">
-                                            <span class="input-group-text" id="basic-addon1"> Tel: </span>
-                                            <input type="number" class="form-control" name="tel" id="tel" placeholder="Teléfono">
+                                            <span class="input-group-text" id="basic-addon1"> *Tel: </span>
+                                            <input type="number" class="form-control @error('tel') is-invalid @enderror" name="tel" id="tel" placeholder="Teléfono"
+                                            value="{{old('tel')}}" required>
                                         </div>
-    
+                                        @error('tel')
+                                            <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
+
                                         <div class="input-group mb-3">
                                             <span class="input-group-text" id="basic-addon1"> E-Mail </span>
-                                            <input type="email" class="form-control" name="mail" id="mail" placeholder="E-Mail">
+                                            <input type="email" class="form-control @error('mail') is-invalid @enderror" name="mail" id="mail" placeholder="E-Mail"
+                                            value="{{old('mail')}}" required>
                                         </div>
-                                        
+                                        @error('mail')
+                                            <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror 
+
                                         <div class="input-group mb-3">
                                             <span class="input-group-text" id="basic-addon1"> Domicilio </span>
-                                            <input type="text" class="form-control" name="direction" id="direction" placeholder="Domicilio">
+                                            <input type="text" class="form-control @error('direction') is-invalid @enderror" name="direction" id="direction" placeholder="Domicilio"
+                                            value="{{old('direction')}}" required>
                                         </div>
+                                        @error('direction')
+                                            <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror 
+
                                     </li>
                                 </ul>
                             </div>

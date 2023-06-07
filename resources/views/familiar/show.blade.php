@@ -81,10 +81,10 @@
                                                 <td> {{$alumno->name}} </td>
                                                 <td> {{$alumno->lastName}} </td>
                                                 <td> {{$alumno->pivot->relation}} </td>
-                                                <td> <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal{{$alumno->id}}"> Modificar </a></td>
+                                                <td> <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal{{$alumno->DNI}}"> Modificar </a></td>
 
-                                                <div class="modal fade" id="modal{{$alumno->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                    <form method="POST" action="{{ route('familiars.updateAlumno', [$familiar->id, $alumno->id]) }}"  role="form" enctype="multipart/form-data">
+                                                <div class="modal fade" id="modal{{$alumno->DNI}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                    <form method="POST" action="{{ route('familiars.updateAlumno', [$familiar->DNI, $alumno->DNI]) }}"  role="form" enctype="multipart/form-data">
                                                     {{ method_field('PUT') }}
                                                     @csrf
                                                     <div class="modal-dialog">
@@ -114,7 +114,7 @@
 
                                                 <td>
                                                     
-                                                    <form action="{{ route('familiars.detachAlumno',[$familiar->id, $alumno->DNI]) }}" method="POST">
+                                                    <form action="{{ route('familiars.detachAlumno',[$familiar->DNI, $alumno->DNI]) }}" method="POST">
                                                         @csrf
                                                         @method('DELETE')
                                                         <button type="submit" class="btn btn-danger"> Borrar relación </button>

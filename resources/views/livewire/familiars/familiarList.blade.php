@@ -35,8 +35,8 @@
                   <td> {{$familiar->direction}} </td>
                   <td> {{$familiar->tel}} </td>
                   <td> {{$familiar->mail}} </td>
-                  <td> <a class="btn btn-primary" href="{{route('familiars.show', $familiar->id)}}"> Detalles </a></td>                  
-                  <td> <a class="btn btn-primary" href="{{route('familiars.edit', $familiar->id)}}"> Modificar </a></td>                  
+                  <td> <a class="btn btn-primary" href="{{route('familiars.show', $familiar->DNI)}}"> Detalles </a></td>                  
+                  <td> <a class="btn btn-primary" href="{{route('familiars.edit', $familiar->DNI)}}"> Modificar </a></td>                  
                   <td>
                     <form action="{{ route('familiars.destroy', $familiar) }}" method="POST">
                       @csrf
