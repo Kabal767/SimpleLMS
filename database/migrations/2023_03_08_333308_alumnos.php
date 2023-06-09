@@ -24,15 +24,32 @@ return new class extends Migration
             $table->enum('sex', ['Masculino','Femenino']);
             $table->date('birthDate');
 
-            //Datos de contacto
-            $table->bigInteger('tel')->unsigned();
+            //Domicilio
+            $table->string('nation');
+            $table->string('jurisdiction');
+            $table->string('department');
             $table->string('locality');
             $table->string('direction');
 
-            //Historia
-            $table->string('birthPlace');
-            $table->string('origin');
-            $table->string('nation');
+            //Birth data
+            $table->string('birthNation');
+            $table->string('birthJurisdiction');
+            $table->string('birthDepartment');
+            $table->string('birthLocality');
+
+
+            //Datos de contacto
+            $table->bigInteger('tel')->unsigned();
+            $table->string('mail')->nullable($value = true);
+
+            //Historia académica
+            $table->string('origin')->nullable($value = true);
+            $table->date('lastYear')->nullable($value = true);
+            $table->string('originNation')->nullable($value = true);
+            $table->string('originJurisdiction')->nullable($value = true);
+            $table->string('originDepartment')->nullable($value = true);
+            $table->string('originLocality')->nullable($value = true);
+            $table->string('originDirection')->nullable($value = true);
 
             //Curso [Foreign data]
             $table->bigInteger('id_curso')->unsigned();

@@ -29,14 +29,23 @@ class AlumnoFormRequest extends FormRequest
             'name' => ['required','string'],
             'lastName' => ['required','string'],
             'sex' => ['required','string'],
+
             'birthDate' => ['required','date','before:today'],
+            'birthNation' => ['required','string'],
+            'birthJurisdiction' => ['required','string'],
+            'birthDepartment' => ['required','string'],
+            'birthLocality' => ['required','string'],
 
             'tel' => ['required','numeric'],
+            'mail' => ['email','nullable'],
+
+            'jurisdiction' => ['required','string'],
+            'department' => ['required','string'],
             'locality' => ['required','string'],
             'direction' => ['required','string'],
 
-            'birthPlace' => ['required', 'string'],
             'origin' => ['nullable','string'],
+            'lastYear' => ['before:today','nullable'],
             'nation' => 'required',
 
             'id_curso' => ['required','exists:cursos,id'],
@@ -65,16 +74,26 @@ class AlumnoFormRequest extends FormRequest
             'tel.required' => 'Por favor introduzca el N° de teléfono del alumno',
             'tel.numeric' => 'Por favor introduzca un número de teléfono válido',
 
-            'locality.required' => 'Por favor introduzca la localidad del alumno',
+            'jurisdiction.required' => 'Por favor introduzca la jurisdicción',
+            'jurisdiction.string' => 'Por favor introduzca un jurisdicción válido',
+            'department.required' => 'Por favor introduzca el departamento',
+            'department.string' => 'Por favor introduzca un departamento válido',
+            'locality.required' => 'Por favor introduzca el localidad',
             'locality.string' => 'Por favor introduzca una localidad válida',
-
-            'direction.required' => 'Por favor introduzca el domicilio del familiar',
+            'direction.required' => 'Por favor introduzca el domicilio',
             'direction.string' => 'Por favor introduzca un domicilio válido',
 
-            'birthPlace.required' => 'Por favor introduzca el lugar de nacimiento del alumno',
-            'birthPlace.string' => 'Por favor introduzca un lugar de nacimiento válido',
+            'birthNation.required' => 'Por favor introduzca la nación de nacimiento del alumno',
+            'birthNation.string' => 'Por favor introduzca una nación válida',
+            'birthJurisdiction.required' => 'Por favor introduzca la jurisdicción',
+            'birthJurisdiction.string' => 'Por favor introduzca una jurisdicción válida',
+            'birthDepartment.required' => 'Por favor introduzca el departamento',
+            'birthDepartment.string' => 'Por favor introduzca un departamento válido',
+            'birthLocality.required' => 'Por favor introduzca la localidad',
+            'birthLocality.string' => 'Por favor introduzca una localidad válida',
 
             'origin.string' => 'Por favor introduzca una escuela válida',
+            'lastYear.before' => 'Por favor introduzca una fecha válida',
 
             'nation.required' => 'Por favor introduzca la nacionalidad del alumno',
 

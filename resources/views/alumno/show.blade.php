@@ -8,7 +8,7 @@
     <section class="content container-fluid">
         <div class="row">
 
-            <!-- Hader with links to more details -->
+            <!-- Header with links to more details -->
             <div class="col-12 align-self-center text-center m-1">
                 <div class="btn-group">
                     <a class="btn btn-primary disabled" href=""> Datos personales </a>

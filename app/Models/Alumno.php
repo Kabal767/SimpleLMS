@@ -54,8 +54,11 @@ class Alumno extends Model
      * @var array
      */
     protected $fillable = ['DNI','name','lastName', 'sex', 'birthDate', 
-    'tel', 'locality', 'direction',
-    'birthPlace','origin','nation',
+    'tel','mail',
+    'jurisdiction','department', 'locality', 'direction',
+    'birthNation','birthJurisdiction','birthDepartment','birthLocality',
+    'origin','lastYear','originNation','originJurisdiction','originDepartment','originLocality','originDirection',
+    'nation',
     'id_curso'];
 
 

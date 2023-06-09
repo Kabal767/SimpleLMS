@@ -63,8 +63,9 @@ class CursoController extends Controller
     public function show($id)
     {
         $curso = Curso::find($id);
+        $years = $curso->alumnos()->selectRaw("distinct('year')")->get();
 
-        return view('curso.show', compact('curso'));
+        return view('curso.show', compact('curso','years'));
     }
 
     /**

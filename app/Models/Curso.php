@@ -39,16 +39,7 @@ class Curso extends Model
      * @var array
      */
     protected $fillable = ['curso','div','turno'];
-
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function alumnos()
-    {
-        return $this->hasMany('App\Models\Alumno', 'id_Curso', 'id');
-    }
-    
+ 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
@@ -73,5 +64,15 @@ class Curso extends Model
         return $this->belongsToMany('App\Models\Materia');
     }
     
+    /**
+     * The roles that belong to the Curso
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function alumnos()
+    {
+        return $this->belongsToMany('App\Models\Alumno', 'alumno_curso','curso_id','alumno_DNI')
+        ->withPivot(['year','inasistencias']);
+    }
 
 }

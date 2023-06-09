@@ -73,15 +73,6 @@
                                             <div class="alert alert-danger">{{ $message }}</div>
                                         @enderror 
 
-                                        <div class="input-group mb-3">
-                                            <span class="input-group-text">*Lugar de nacimiento</span>
-                                            <input type="text" class="form-control @error('birthPlace') is-invalid @enderror"
-                                            name="birthPlace" id="birthPlace" placeholder="Lugar de nacimiento" value="{{old('birthPlace')}}" required>
-                                        </div>
-                                        @error('birthPlace')
-                                            <div class="alert alert-danger">{{ $message }}</div>
-                                        @enderror 
-
                                         <div class="input-group mb-3">                                            
                                             <span class="input-group-text" id="basic-addon1"> *Nacionalidad </span>
                                             <input type="text" class="form-control @error('nation') is-invalid @enderror"
@@ -93,9 +84,50 @@
 
                                     </li>
                                 </ul>
-                            </div>
+                                
+                                <ul class="list-group m-4">
+                                    <li class="list-group-item active fw-bold"> Lugar de nacimiento </li>                                    
+                                    <li class="list-group-item">
 
-                            <div class="col-6">
+                                        <div class="input-group mb-3">                                            
+                                            <span class="input-group-text" id="basic-addon1"> *Nación </span>
+                                            <input type="text" class="form-control @error('birthNation') is-invalid @enderror" 
+                                            name="birthNation" id="birthNation" placeholder="Nación" value="{{old('birthNation')}}" required>
+                                        </div>
+                                        @error('birthNation')
+                                            <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror 
+
+                                        <div class="input-group mb-3">                                            
+                                            <span class="input-group-text" id="basic-addon1"> *Jurisdicción </span>
+                                            <input type="text" class="form-control @error('birthJurisdiction') is-invalid @enderror" 
+                                            name="birthJurisdiction" id="birthJurisdiction" placeholder="Jurisdicción" value="{{old('birthJurisdiction')}}" required>
+                                        </div>
+                                        @error('birthJurisdiction')
+                                            <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror 
+
+                                        <div class="input-group mb-3">                                            
+                                            <span class="input-group-text" id="basic-addon1"> *Departamento </span>
+                                            <input type="text" class="form-control @error('birthDepartment') is-invalid @enderror" 
+                                            name="birthDepartment" id="birthDepartment" placeholder="Departamento" value="{{old('birthDepartment')}}" required>
+                                        </div>
+                                        @error('birthDepartment')
+                                            <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror 
+
+                                        <div class="input-group mb-3">                                            
+                                            <span class="input-group-text" id="basic-addon1"> *Localidad </span>
+                                            <input type="text" class="form-control @error('birthLocality') is-invalid @enderror" 
+                                            name="birthLocality" id="birthLocality" placeholder="Localidad" value="{{old('birthLocality')}}" required>
+                                        </div>
+                                        @error('birthLocality')
+                                            <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror 
+
+                                    </li>
+                                </ul>
+
                                 <ul class="list-group m-4">
                                     <li class="list-group-item active fw-bold"> Datos de contacto </li>                                    
                                     <li class="list-group-item">
@@ -110,36 +142,128 @@
                                         @enderror 
 
                                         <div class="input-group mb-3">
-                                            <span class="input-group-text"> *Localidad </span>
+                                            <span class="input-group-text"> E-Mail </span>
+                                            <input type="text" class="form-control @error('mail') is-invalid @enderror" 
+                                            name="mail" id="mail" placeholder="Localidad" value="{{old('mail')}}">
+                                        </div>
+                                        @error('mail')
+                                            <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror 
+                                    </li>
+                                </ul>
+
+                                
+                            </div>
+
+                            <div class="col-6">
+
+                                <ul class="list-group m-4">
+                                    <li class="list-group-item active fw-bold"> Domicilio actual </li>                                    
+                                    <li class="list-group-item">
+
+                                        <div class="input-group mb-3">                                            
+                                            <span class="input-group-text" id="basic-addon1"> *Jurisdicción </span>
+                                            <input type="text" class="form-control @error('jurisdiction') is-invalid @enderror" 
+                                            name="jurisdiction" id="jurisdiction" placeholder="Jurisdicción" value="{{old('jurisdiction')}}" required>
+                                        </div>
+                                        @error('jurisdiction')
+                                            <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror 
+
+                                        <div class="input-group mb-3">                                            
+                                            <span class="input-group-text" id="basic-addon1"> *Departamento </span>
+                                            <input type="text" class="form-control @error('department') is-invalid @enderror" 
+                                            name="department" id="department" placeholder="Departamento" value="{{old('department')}}" required>
+                                        </div>
+                                        @error('department')
+                                            <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror 
+
+                                        <div class="input-group mb-3">                                            
+                                            <span class="input-group-text" id="basic-addon1"> *Localidad </span>
                                             <input type="text" class="form-control @error('locality') is-invalid @enderror" 
                                             name="locality" id="locality" placeholder="Localidad" value="{{old('locality')}}" required>
                                         </div>
                                         @error('locality')
                                             <div class="alert alert-danger">{{ $message }}</div>
-                                        @enderror 
+                                        @enderror
 
-                                        <div class="input-group mb-3">
-                                            <span class="input-group-text"> *Domicilio </span>
+                                        <div class="input-group mb-3">                                            
+                                            <span class="input-group-text" id="basic-addon1"> *Calle/Barrio </span>
                                             <input type="text" class="form-control @error('direction') is-invalid @enderror" 
-                                            name="direction" id="direction" placeholder="Domicilio" value="{{old('direction')}}" required>
+                                            name="direction" id="direction" placeholder="Calle/Barrio" value="{{old('direction')}}" required>
                                         </div>
                                         @error('direction')
                                             <div class="alert alert-danger">{{ $message }}</div>
-                                        @enderror 
+                                        @enderror
 
                                     </li>
                                 </ul>
 
                                 <ul class="list-group ms-4 me-4 mb-4">
-                                    <li class="list-group-item active fw-bold"> Información académica </li>                                    
+                                    <li class="list-group-item active fw-bold"> Escuela de origen </li>                                    
                                     <li class="list-group-item">
 
                                         <div class="input-group mb-3">
-                                            <span class="input-group-text"> Origen </span>
+                                            <span class="input-group-text"> Nombre de escuela </span>
                                             <input type="text" class="form-control @error('origin') is-invalid @enderror" 
                                             name="origin" id="origin" placeholder="Escuela de origen" value="{{old('origin')}}">
                                         </div>
                                         @error('origin')
+                                            <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror 
+
+                                        <div class="input-group mb-3">
+                                            <span class="input-group-text"> Último año de cursado </span>
+                                            <input type="number" class="form-control @error('lastYear') is-invalid @enderror" 
+                                            name="lastYear" id="lastYear" placeholder="Último año" value="{{old('lastYear')}}">
+                                        </div>
+                                        @error('lastYear')
+                                            <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror 
+
+                                        <div class="input-group mb-3">
+                                            <span class="input-group-text"> Nación </span>
+                                            <input type="text" class="form-control @error('originNation') is-invalid @enderror" 
+                                            name="originNation" id="originNation" placeholder="Nación" value="{{old('originNation')}}">
+                                        </div>
+                                        @error('originNation')
+                                            <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror 
+
+                                        <div class="input-group mb-3">
+                                            <span class="input-group-text"> Jurisdicción </span>
+                                            <input type="text" class="form-control @error('originJurisdiction') is-invalid @enderror" 
+                                            name="originJurisdiction" id="originJurisdiction" placeholder="Jurisdicción" value="{{old('originJurisdiction')}}">
+                                        </div>
+                                        @error('originJurisdiction')
+                                            <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror 
+
+                                        <div class="input-group mb-3">
+                                            <span class="input-group-text"> Departamento </span>
+                                            <input type="text" class="form-control @error('originDepartment') is-invalid @enderror" 
+                                            name="originDepartment" id="originDepartment" placeholder="Departamento" value="{{old('originDepartment')}}">
+                                        </div>
+                                        @error('originDepartment')
+                                            <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror 
+
+                                        <div class="input-group mb-3">
+                                            <span class="input-group-text"> Localidad </span>
+                                            <input type="text" class="form-control @error('originLocality') is-invalid @enderror" 
+                                            name="originLocality" id="originLocality" placeholder="Localidad" value="{{old('originLocality')}}">
+                                        </div>
+                                        @error('originLocality')
+                                            <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror 
+
+                                        <div class="input-group mb-3">
+                                            <span class="input-group-text"> Dirección </span>
+                                            <input type="text" class="form-control @error('originDirection') is-invalid @enderror" 
+                                            name="originDirection" id="originDirection" placeholder="Dirección" value="{{old('originDirection')}}">
+                                        </div>
+                                        @error('originDirection')
                                             <div class="alert alert-danger">{{ $message }}</div>
                                         @enderror 
 

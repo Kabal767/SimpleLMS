@@ -61,7 +61,7 @@ class AlumnoController extends Controller
         $date = date('y', strtotime($year));
 
         //Attach curso to student
-        $alumno->cursos()->attach($curso, ['condition' => 'cursando']);
+        $alumno->cursos()->attach($curso, ['condition' => 'cursando', 'year' => $year]);
 
         //Attach curso materias to student
         foreach($curso->materias as $materia){

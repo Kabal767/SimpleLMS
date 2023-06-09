@@ -20,9 +20,14 @@ return new class extends Migration
             $table->string('names');
             $table->string('lastName');
             $table->bigInteger('tel');
-            $table->string('direction');
-            $table->string('nation');
             $table->string('mail')->nullabe($value=true);
+            
+            //Domicilio
+            $table->string('nation');
+            $table->string('jurisdiction');
+            $table->string('department');
+            $table->string('locality');
+            $table->string('direction');
 
             //Primary key
             $table->primary('DNI');
