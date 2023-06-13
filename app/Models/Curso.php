@@ -72,7 +72,7 @@ class Curso extends Model
     public function alumnos()
     {
         return $this->belongsToMany('App\Models\Alumno', 'alumno_curso','curso_id','alumno_DNI')
-        ->withPivot(['year','inasistencias']);
+        ->withPivot(['year','inasistencias','condition']);
     }
 
 }

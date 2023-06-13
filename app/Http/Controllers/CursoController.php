@@ -4,7 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Curso;
 use App\Models\Materia;
+use App\Models\Alumno;
 use Illuminate\Http\Request;
+Use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 
 /**
  * Class CursoController
@@ -20,8 +23,9 @@ class CursoController extends Controller
     public function index()
     {
         $cursos = Curso::all();
+        $materias = Materia::all();
 
-        return view('curso.index', compact('cursos'));
+        return view('curso.index', compact('cursos','materias'));
     }
 
     /**
@@ -76,9 +80,10 @@ class CursoController extends Controller
      */
     public function edit($id)
     {
-        $curso = Curso::find($id);
+        $curso = Curso::findOrFail($id);
+        $materias = Materia::all();
 
-        return view('curso.edit', compact('curso'));
+        return view('curso.edit', compact('curso','materias'));
     }
 
     /**
@@ -90,12 +95,24 @@ class CursoController extends Controller
      */
     public function update(Request $request, Curso $curso)
     {
-        request()->validate(Curso::$rules);
+        $alumnos = Alumno::where('id_curso',$curso->id)->get();
+        $year = Carbon::now();
+        $date = date('y', strtotime($year));
 
-        $curso->update($request->all());
+        foreach($alumnos as $alumno){
+            //Here we take the relations to remove from the student
+            $relations = DB::table('alumno_materia')->where('origin',$curso->id);
+            $toRemove = $alumno->materias()->whereExists($relations)->select('id')->get();
+
+            $alumno->materias()->detach($toRemove);
+            
+            $alumno->materias()->syncWithPivotValues($request->materias, ['origin' => $curso->id, 'year' => $date]);
+        }
+
+        $curso->materias()->sync($request->materias);
 
         return redirect()->route('cursos.index')
-            ->with('success', 'Curso updated successfully');
+            ->with('success', 'Curso actualizado exitósamente');
     }
 
     /**

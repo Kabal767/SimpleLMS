@@ -39,8 +39,8 @@
                     <td> {{$alumno->name}} </td>
                     <td> {{$alumno->lastName}} </td>
                     <td> RECUERDA CODEAR ESTO </td>
-                    <td> RECUERDA AÑADIR ESTO A LA TABLA PIVOT </td>
-                    <td> RECUERDA AÑADIR ESTO A LA TABLA PIVOT </td>
+                    <td> {{$alumno->pivot->inasistencias}}/30 </td>
+                    <td> {{$alumno->pivot->condition}} </td>
                     <td> <a class="btn btn-primary" href="{{route('alumnos.show',$alumno->DNI)}}"> Detalles </a> </td>
                 </tr>
                 @endforeach

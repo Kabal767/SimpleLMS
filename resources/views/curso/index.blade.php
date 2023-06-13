@@ -26,12 +26,29 @@
                         </div>
                     @endif
                         
-                    @livewire('cursos.curso-list', ['cursos' => $cursos])
+                    @livewire('cursos.curso-list', ['cursos' => $cursos, 'materias' => $materias])
 
                 </div>
 
 
             </div>
         </div>
+
+
     </div>
+@endsection
+
+<!-- Logic -->
+@section('js')
+    
+<script>
+    //This one gives format to the select2 class
+    $(document).ready(function() {
+    $('.select2').select2();
+    });
+</script>
+
+<!-- Select -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
+
 @endsection

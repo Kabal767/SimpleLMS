@@ -8,6 +8,7 @@ use Livewire\Component;
 class cursoList extends Component
 {
     public $cursos;
+    public $materias;
 
     public $selectedDiv = '';
     public $selectedCurso = '';
