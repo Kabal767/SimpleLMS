@@ -43,7 +43,7 @@
                     <td> {{$alumno->lastName}} </td>
                     <td> {{$alumno->sex}} </td>
                     <td> {{$alumno->birthDate}} </td>
-                    <td> {{$alumno->birthPlace}} </td>
+                    <td> {{$alumno->birthLocality}} </td>
                     <td> {{$alumno->nation}} </td>
                     <td> {{$alumno->tel}} </td>
                     <td> {{$alumno->locality}} </td>

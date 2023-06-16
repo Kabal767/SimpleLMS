@@ -36,7 +36,7 @@
                                         <h1><span class="badge bg-primary"> Curso: {{$curso->curso}}°{{$curso->div}} - Turno {{$curso->turno}}  </span></h1>
                                     </div>
                                     <div class="col-3">
-                                        <h1><span class="badge bg-primary"> Sexo: {{$alumno->gender}} </span></h1>
+                                        <h1><span class="badge bg-primary"> Sexo: {{$alumno->sex}} </span></h1>
                                     </div>
 
                                 </div>                                 
@@ -46,41 +46,87 @@
                     <div class="card-body">
                         
                         <div class="row">
+
                             <!-- Datos de alumno -->
-                            <div class="col-md-6">
-                                <div class="col-md-6">
-                                    <ul class="list-group list-group-flush">
+                            <div class="col-md-8">
+                                
+                                <div class="row">
+                                    <div class="col-md-4">
 
                                         <!-- Datos personales -->
                                         <li class="list-group-item">
                                             <ul class="list-group m-2">
-                                                <li class="list-group-item active"> Fecha de nacimiento: {{$alumno->birthDate}} </li>
-                                                <li class="list-group-item active"> Edad: </li>
-                                                <li class="list-group-item active"> Nacionalidad: {{$alumno->nation}} </li>
-                                                <li class="list-group-item active"> Lugar de nacimiento: {{$alumno->birthPlace}} </li>
+                                                <li class="list-group-item active fw-bold"> DOMICILIO </li>
+                                                <li class="list-group-item"> Nacionalidad: {{$alumno->nation}} </li>
+                                                <li class="list-group-item"> Jurisdicción: {{$alumno->jurisdiction}} </li>
+                                                <li class="list-group-item"> Departamento: {{$alumno->department}} </li>
+                                                <li class="list-group-item"> Localidad: {{$alumno->locality}} </li>
+                                                <li class="list-group-item"> Domicilio: {{$alumno->direction}} </li>
                                             </ul>
                                         </li>
+
+                                    </div>
+                                    
+                                    <div class="col-4">
+
+                                        <!-- Lugar de nacimiento -->
+                                        <li class="list-group-item">
+                                            <ul class="list-group m-2">
+                                                <li class="list-group-item active fw-bold"> DATOS DE NACIMIENTO </li>
+                                                <li class="list-group-item"> Fecha de nacimiento: {{$alumno->birthDate}} </li>
+                                                <li class="list-group-item"> Nación: {{$alumno->birthNation}} </li>
+                                                <li class="list-group-item"> Jurisdicción: {{$alumno->birthJurisdiction}} </li>
+                                                <li class="list-group-item"> Departamento: {{$alumno->birthDepartment}} </li>
+                                                <li class="list-group-item"> Localidad: {{$alumno->birthLocality}} </li>
+                                            </ul>
+                                        </li>
+
+                                    </div>
+
+                                    <div class="col-4">
+
+                                        <!-- Historia académica -->
+                                        <li class="list-group-item">
+                                            <ul class="list-group m-2">
+                                                <li class="list-group-item active fw-bold"> HISTORIA ACADÉMICA </li>
+                                                <li class="list-group-item"> Fecha de nacimiento: {{$alumno->origin}} </li>
+                                                <li class="list-group-item"> Nación: {{$alumno->originNation}} </li>
+                                                <li class="list-group-item"> Jurisdicción: {{$alumno->originJurisdiction}} </li>
+                                                <li class="list-group-item"> Departamento: {{$alumno->originDepartment}} </li>
+                                                <li class="list-group-item"> Localidad: {{$alumno->originLocality}} </li>
+                                                <li class="list-group-item"> Direcciión: {{$alumno->originDirection}} </li>
+                                            </ul>
+                                        </li>
+
+                                    </div>
+                                </div>
+
+                                <div class="row mt-3">
+                                    <div class="col-4">
 
                                         <!-- Datos de contacto -->
                                         <li class="list-group-item">
                                             <ul class="list-group m-2">
-                                                <li class="list-group-item active"> Teléfono: {{$alumno->tel}} </li>
-                                                <li class="list-group-item active"> Domicilio: {{$alumno->direction}} </li>
-                                                <li class="list-group-item active"> Origen: {{$alumno->origin}} </li>
+                                                <li class="list-group-item active fw-bold"> CONTACTO </li>
+                                                <li class="list-group-item"> Teléfono: {{$alumno->tel}} </li>
+                                                <li class="list-group-item"> E-Mail: {{$alumno->mail}} </li>
                                             </ul> 
                                         </li>
-                                    </ul>  
+
+                                    </div>
                                 </div>
+
                             </div>    
                             
                             <!-- Datos de desempeño-->
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <div class="row justify-content-end">
-                                <div class="col-md-6">
+                                <div class="col-md-12">
                                     <ul class="list-group list-group-flush">
                                         <li class="list-group-item">
                                             <ul class="list-group list-group m-2">
-                                                <li class="list-group-item active"> Inasistencias </li>
+                                                <li class="list-group-item active"> Inasistencias {{$alumno->cursos()->where('curso_id',$alumno->id_curso)->
+                                                first()->pivot->inasistencias}} </li>
                                                 <li class="list-group-item active"> Promedio: </li>
                                             </ul>
                                         </li>
@@ -98,6 +144,11 @@
                         </div>
 
                     </div>
+                    
+                    <div class="card-footer">
+                        @livewire('alumnos.alumno-event-list', ['alumno' => $alumno])
+                    </div>
+
                     <div class="card-footer">
                         <a class="btn btn-primary ms-4" href="{{ route('alumnos.index') }}"> Regresar a la lista </a> 
                     </div>

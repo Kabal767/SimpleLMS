@@ -36,7 +36,7 @@
                                     <h1><span class="badge bg-primary"> Curso: {{$curso->curso}}°{{$curso->div}} - Turno {{$curso->turno}}  </span></h1>
                                 </div>
                                 <div class="col-3">
-                                    <h1><span class="badge bg-primary"> Sexo: {{$alumno->gender}} </span></h1>
+                                    <h1><span class="badge bg-primary"> Sexo: {{$alumno->sex}} </span></h1>
                                 </div>
 
                             </div>                                 

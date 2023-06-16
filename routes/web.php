@@ -29,6 +29,10 @@ Route::get('alumnos/{alumno}/toDos', [App\Http\Controllers\AlumnoController::cla
 Route::get('alumnos/{alumno}/family', [App\Http\Controllers\AlumnoController::class, 'family']) ->name ('alumnos.family') ->middleware('auth');
     Route::post('alumnos/{alumno}/family', [App\Http\Controllers\AlumnoController::class, 'addFamiliar']) ->name ('alumnos.addFamiliar') ->middleware('auth');
 
+    Route::post('alumnos/{alumno}/evento',[App\Http\Controllers\AlumnoController::class, 'addEvento']) ->name ('alumnos.addEvento') ->middleware('auth');
+    Route::put('alumnos/{alumno}/evento/{evento}',[App\Http\Controllers\AlumnoController::class, 'updateEvento']) ->name ('alumnos.updateEvento') ->middleware('auth');
+    Route::delete('alumnos/{alumno}/evento/{evento}',[App\Http\Controllers\AlumnoController::class, 'eraseEvento']) ->name ('alumnos.eraseEvento') ->middleware('auth');
+
 //Rutas de exámenes
 Route::resource('exams', App\Http\Controllers\ExamController::class);
 Route::get('exams/{exam}/mesas', [App\Http\Controllers\ExamController::class, 'showMesas']) -> name('exams.showMesas') ->middleware('auth');

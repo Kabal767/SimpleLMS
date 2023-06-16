@@ -106,7 +106,7 @@ class Alumno extends Model
     public function cursos()
     {
         return $this->belongsToMany('App\Models\Curso', 'alumno_curso', 'alumno_DNI', 'curso_id')
-        ->withPivot(['condition']);
+        ->withPivot(['condition','inasistencias']);
     }
 
     /**
@@ -118,5 +118,15 @@ class Alumno extends Model
     {
         return $this->belongsToMany('App\Models\Exam', 'alumno_exam', 'alumno_DNI', 'exam_id')
         ->withPivot(['oral','written','callification','mesa_id']);
+    }
+
+    /**
+     * Get all of the comments for the Alumno
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function eventos()
+    {
+        return $this->hasMany('App\Models\Evento', 'DNI_alumno', 'DNI');
     }
 }

@@ -6,6 +6,7 @@ use App\Models\Alumno;
 use App\Models\Curso;
 use App\Models\Materia;
 use App\Models\Familiar;
+use App\Models\Evento;
 use Illuminate\Http\Request;
 Use Carbon\Carbon;
 use App\Http\Requests\AlumnoFormRequest;
@@ -189,5 +190,48 @@ class AlumnoController extends Controller
         'average' => $average, 'callification' => $request->callification]);
 
         return redirect()->route('alumnos.toDos', ['alumno'=>$alumno->DNI]);
+    }
+
+    public function addEvento(Request $request, Alumno $alumno){
+
+        $newEvento = $request->all();
+        $newInasistencias = 0;
+        $curso = $alumno->cursos()->where('curso_id',$alumno->id_curso)->first();
+
+        if($request->type == 'Inasistencia'){
+            $newInasistencias = $curso->pivot->inasistencias + 1;
+
+            $alumno->cursos()->updateExistingPivot($alumno->id_curso,['inasistencias' => $newInasistencias]);
+        }
+
+        if($request->hasFile('file')){
+            $newEvento['file']=$request->file('file')->store('uploads','public');
+        }
+        $alumno->eventos()->create($newEvento);
+
+        
+        return redirect()->route('alumnos.show', ['alumno' => $alumno->DNI])
+            ->with('success', 'Evento registrado exitósamente');
+    }
+
+    public function updateEvento(Request $request, $alumno,$evento){
+        Evento::findOrFail($evento)->update($request->all());
+        
+        return redirect()->route('alumnos.show', ['alumno' => $alumno]);
+    }
+
+    public function eraseEvento(Alumno $alumno, $evento){
+        $toDelete = Evento::findOrFail($evento);
+        $newInasistencias = 0;
+        $curso = $alumno->cursos()->where('curso_id',$alumno->id_curso)->first();
+
+        if($toDelete->type == 'Inasistencia'){
+            $newInasistencias = $curso->pivot->inasistencias -1;
+            $alumno->cursos()->updateExistingPivot($alumno->id_curso,['inasistencias' => $newInasistencias]);
+        }
+
+        $toDelete->delete();
+
+        return redirect()->route('alumnos.show', ['alumno' => $alumno->DNI]);
     }
 }

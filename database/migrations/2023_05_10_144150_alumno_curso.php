@@ -19,8 +19,8 @@ return new class extends Migration
 
             $table->enum('condition', ['cursando', 'promocionado']);
             $table->date('year');
-            $table->integer('inasistencias')->default(0);
-
+            $table->integer('inasistencias')->unsigned()->default(0);
+            $table->float('average')->unsigned()->default(0);
             $table->bigInteger('alumno_DNI')->unsigned();
             $table->bigInteger('curso_id')->unsigned();
 
