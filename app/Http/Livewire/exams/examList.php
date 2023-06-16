@@ -5,10 +5,13 @@ namespace App\Http\Livewire\exams;
 use App\Models\Curso;
 use App\Models\Materia;
 use App\Models\Exam;
+use Livewire\Component;
+use Illuminate\Support\Facades\DB;
 
 class examList extends Component
 {
     public $exams;
+    public $cursos;
 
     public $selectedMateria;
     public $shownMaterias;
@@ -16,18 +19,29 @@ class examList extends Component
     public $selectedCurso;
     public $selectedCondition;
 
-    public $orderBy = 'name';
+    public $orderBy = 'id';
     public $orderIn = 'asc';
 
     public function render(){
 
-        //With this we found materias that correspond to the chosen curso
-        $relations = Curso::where('id',$this->selectedCurso);
-        $this->shownMaterias = Materia::whereExists($relations)->get();
+        $this->exams=Exam::orderBy($this->orderBy, $this->orderIn)->get();
+        $this->shownMaterias = Materia::orderBy('name','desc')->get();
 
-        //With this we find the exams that correspond to the chosen curso and materia and orber by accordingly
-        $this->exams = Exam::where('condition',$this->selectedCondition)->where('materia_id',$this->selectedMateria)->where('curso_id',$this->selectedCurso)->
-        orderBy($this->orderBy, $this->orderIn)->get();
+        //With this we find materias that correspond to the chosen curso
+        if($this->selectedCurso !== "" && $this->selectedCurso !== NULL){
+            $this->exams = $this->exams->where('curso_id',$this->selectedCurso);
+
+            $this->shownMaterias = Curso::findOrFail($this->selectedCurso)->materias()->get();
+        }
+
+
+        if($this->selectedMateria !== "" && $this->selectedMateria !== NULL){
+            $this->exams = $this->exams->where('materia_id',$this->selectedMateria);
+        }
+
+        if($this->selectedCondition !== "" && $this->selectedCondition !== NULL){
+            $this->exams = $this->exams->where('condition',$this->selectedCondition);
+        }
         
         return view('livewire.exams.examList');
     }

@@ -186,6 +186,16 @@
         </div>
     </div>   
 
+    <div class="row m-3">
+        <div class="card">
+            <div class="card-header">
+                <div class="row m-3">
+                    <a class="btn btn-primary" href="{{route('exams.index')}}"> Retroceder </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
     </div>
 </div>
 

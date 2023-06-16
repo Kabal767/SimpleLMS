@@ -5,7 +5,7 @@
         <span class="input-group-text"> Buscar </span>
         <input type="text" class="form-control" placeholder="Buscar" wire:model="searchInput">
         <select class="form-select" wire:model="selectedCurso">
-          <option value="" selected> Ningún curso seleccionado </option>
+          <option value="" selected> Cualquiera </option>
           @foreach($cursos as $curso)
             <option value="{{$curso->id}}"> {{$curso->curso}}° "{{$curso->div}}" - Turno {{$curso->turno}} </option>
           @endforeach
