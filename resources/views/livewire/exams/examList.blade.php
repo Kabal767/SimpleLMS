@@ -51,8 +51,8 @@
                     <th> ID </th>
                     <th> Fecha </th>
                     <th> Condición </th>
-                    <th> Materia </th>
                     <th> Curso </th>
+                    <th> Materia </th>
                     <th colspan="2"> Acciones </th>
                 </tr>
             </thead>

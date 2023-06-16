@@ -39,7 +39,11 @@
                         <td> {{$event->type}} </td>
                         <td> {{$event->date}} </td>
                         <td> {{$event->hour}} </td>
-                        <td> <img src="{{asset('storage/uploads/3fagxbbyv1N3baMe7cmddroBfcaIqJg47ttj1dnC.png')}}" > </td>
+                        <td> 
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#image{{$event->id}}" @if($event->file == NULL) disabled @endif>
+                                Archivo
+                            </button> 
+                        </td>
                         <td>
                             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modify{{$event->id}}">
                                 Modificar
@@ -172,6 +176,22 @@
                     </div>
                 </form>
 
+            </div>
+        </div>
+    </div>
+
+    <!--IMAGE MODAL-->
+    <div wire:ignore class="modal fade" id="image{{$evento->id}}" ria-labelledby="image{{$evento->id}}Label" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="row m-3">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel"> Archivo del evento N°{{$evento->id}} </h1>
+                    </div>
+                </div>
+                <div class="col align-self-center m-3">
+                    <img src="{{asset('storage/'.$evento->file)}}">
+                </div>
             </div>
         </div>
     </div>

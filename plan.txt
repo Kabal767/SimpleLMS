@@ -3,5 +3,5 @@ Este documento contiene los pasos inmediatos a seguir con el desarrollo del proy
     1. Modificar el Index de exámenes para permitir ordernar y buscar. X
         a. Reparar el formulario de carga de nuevo examen para generar una presentación más limpia. X
     2. Generar el método para calcular el promedio general del alumno en un curso específico.
-    3. Mostrar las imágenes de los eventos
+    3. Mostrar las imágenes de los eventos X
     4. Qué carajos hago con la educación física?
