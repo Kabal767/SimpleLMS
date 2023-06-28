@@ -38,10 +38,10 @@
                     <th> {{$alumno->DNI}} </th>
                     <td> {{$alumno->name}} </td>
                     <td> {{$alumno->lastName}} </td>
-                    <td> RECUERDA CODEAR ESTO </td>
+                    <td> {{$alumno->pivot->average}}</td>
                     <td> {{$alumno->pivot->inasistencias}}/30 </td>
                     <td> {{$alumno->pivot->condition}} </td>
-                    <td> <a class="btn btn-primary" href="{{route('alumnos.show',$alumno->DNI)}}"> Detalles </a> </td>
+                    <td> <a class="btn btn-primary" href="{{route('alumnos.show',$alumno->DNI)}}"> Detalles del Alumno </a> </td>
                 </tr>
                 @endforeach
             </tbody>

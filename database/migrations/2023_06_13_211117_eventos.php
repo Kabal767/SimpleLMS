@@ -18,7 +18,7 @@ return new class extends Migration
             $table->timestamps();
 
             $table->string('user');
-            $table->text('description');
+            $table->text('description')->nullable();
             $table->enum('type',['Falta de conducta','Inasistencia','Retiro']);
             $table->date('date');
             $table->time('hour');

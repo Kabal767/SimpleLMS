@@ -18,7 +18,7 @@ return new class extends Migration
             $table->timestamps();
 
             $table->enum('condition', ['cursando', 'promocionado']);
-            $table->date('year');
+            $table->year('year');
             $table->integer('inasistencias')->unsigned()->default(0);
             $table->float('average')->unsigned()->default(0);
             $table->bigInteger('alumno_DNI')->unsigned();

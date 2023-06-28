@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Alumnos;
 
 use App\Models\Alumno;
+use App\Models\Curso;
 use Livewire\Component;
 
 class alumnoList extends Component
@@ -25,8 +26,10 @@ class alumnoList extends Component
         orderBy($this->orderBy, $this->orderIn)->get();
 
         if($this->selectedCurso !== ""){
-        $this->shownAlumnos = $alumnos->where('id_curso',$this->selectedCurso);}
-        else{$this->shownAlumnos = $alumnos;}
+            $alumnos = $alumnos->where('id_curso', $this->selectedCurso);
+        }
+        
+        $this->shownAlumnos = $alumnos;        
 
         return view('livewire.alumnos.alumnoList');
     }

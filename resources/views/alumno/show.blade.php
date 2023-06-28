@@ -127,7 +127,7 @@
                                             <ul class="list-group list-group m-2">
                                                 <li class="list-group-item active"> Inasistencias {{$alumno->cursos()->where('curso_id',$alumno->id_curso)->
                                                 first()->pivot->inasistencias}} </li>
-                                                <li class="list-group-item active"> Promedio: </li>
+                                                <li class="list-group-item active"> Promedio: {{$alumno->cursos()->where('curso_id',$alumno->id_curso)->first()->pivot->average}} </li>
                                             </ul>
                                         </li>
                                         <li class="list-group-item">

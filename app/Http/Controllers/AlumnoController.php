@@ -7,6 +7,7 @@ use App\Models\Curso;
 use App\Models\Materia;
 use App\Models\Familiar;
 use App\Models\Evento;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 Use Carbon\Carbon;
 use App\Http\Requests\AlumnoFormRequest;
@@ -58,15 +59,14 @@ class AlumnoController extends Controller
         $curso = Curso::findOrFail($request['id_curso']);
 
         //Get present year
-        $year = Carbon::Now();
-        $date = date('y', strtotime($year));
+        $year = Carbon::Now()->format('Y');
 
         //Attach curso to student
         $alumno->cursos()->attach($curso, ['condition' => 'cursando', 'year' => $year]);
 
         //Attach curso materias to student
         foreach($curso->materias as $materia){
-            $alumno->materias()->attach($materia->id, ['year' => $date, 'condition' => 'Cursando', 'origin' => $request['id_curso']]);
+            $alumno->materias()->attach($materia->id, ['year' => $year, 'condition' => 'Cursando', 'origin' => $request['id_curso']]);
         }
 
         return redirect()->route('alumnos.toDos', ['alumno'=>$alumno->DNI])
@@ -84,6 +84,8 @@ class AlumnoController extends Controller
         $alumno = Alumno::findOrFail($id);
         $curso = Curso::findOrFail($alumno->id_curso);
         $materias = $alumno->materias()->where('origin', $alumno->id_curso)->get();
+
+        $this->CalculateAverage($curso,$alumno);
 
         return view('alumno.show', compact('alumno', 'curso', 'materias'));
     }
@@ -189,6 +191,10 @@ class AlumnoController extends Controller
         $alumno->materias()->updateExistingPivot($materia, ['quarter1' => $request->q1, 'quarter2' => $request->q2, 'quarter3' => $request->q3, 
         'average' => $average, 'callification' => $request->callification]);
 
+        $curso = Curso::findOrFail($alumno->materias->find($materia)->pivot->origin);
+
+        $this->CalculateAverage($curso, $alumno);
+
         return redirect()->route('alumnos.toDos', ['alumno'=>$alumno->DNI]);
     }
 
@@ -234,4 +240,90 @@ class AlumnoController extends Controller
 
         return redirect()->route('alumnos.show', ['alumno' => $alumno->DNI]);
     }
-}
+
+    public function CalculateAverage(Curso $curso, Alumno $alumno){
+
+        //$relations = DB::table('alumno_materia')->where('origin',$curso->id);
+
+        $materias = $alumno->materias()->where('origin',$curso->id)->pluck('average');
+
+        $average = 0;
+
+        foreach($materias as $materia){
+            $average = $average + $materia;
+        }
+
+        $average = intdiv($average,$materias->count());
+
+        $alumno->cursos()->updateExistingPivot($curso->id,['average' => $average]);
+    }
+
+    public function promotion(Alumno $alumno){
+
+        $cursos = Curso::where('curso',$alumno->curso->curso+1)->get();
+        
+        return view('alumno.promote', compact('alumno', 'cursos'));
+    }
+
+    public function promoteAlumno(Request $request, Alumno $alumno){
+
+        $alumno->update(['id_curso' => $request->curso]);
+
+        $this->closeMaterias($alumno, $request->neededNote);
+
+        $this->openMaterias($alumno, $request->curso);
+
+        return redirect()->route('alumnos.toDos', ['alumno'=>$alumno->DNI])
+            ->with('success', 'Alumno promocionado exitósamente.');
+    }
+
+    public function repeatAlumno(Alumno $alumno){
+
+        $materias = $alumno->materias()->where('condition','Cursando')->get();
+
+        $year = Carbon::Now()->format('Y');
+
+        foreach($materias as $materia){
+            $alumno->materias()->updateExistingPivot($materia->id,['quarter1' => 0, 'quarter2' => 0, 'quarter3' => 0, 'average' => 0, 'callification' => 0]);
+        }
+        
+        $alumno->cursos()->updateExistingPivot($alumno->id_curso,['inasistencias' => 0, 'average' => 0, 'year' => $year]);
+
+        return redirect()->route('alumnos.toDos', ['alumno' => $alumno->DNI]);
+    }
+
+    public function egressAlumno(Request $request, Alumno $alumno){
+
+        $this->closeMaterias($alumno, $request->neededNote);
+
+    }
+
+    public function closeMaterias(Alumno $alumno, $neededNote){
+
+        $materias = $alumno->materias()->where('condition', 'Cursando')->get();
+
+        foreach($materias as $materia){
+            if($materia->pivot->average >= $neededNote){
+                $alumno->materias()->updateExistingPivot($materia->id, ['condition' => 'Aprobada', 'callification' => $materia->pivot->average]);
+            }
+            else{
+                $alumno->materias()->updateExistingPivot($materia->id, ['condition' => 'Pendiente']);
+            }
+        }
+
+    }
+
+    public function openMaterias(Alumno $alumno, $curso){
+        
+        $curso = Curso::findOrFail($curso);
+
+        $year = Carbon::Now()->format('Y');
+        
+        $alumno->cursos()->attach($curso, ['condition' => 'cursando', 'year' => $year]);
+
+        foreach($curso->materias as $materia){
+            $alumno->materias()->attach($materia->id, ['year' => $year, 'condition' => 'Cursando', 'origin' => $curso->id]);
+        }
+
+    }
+} 

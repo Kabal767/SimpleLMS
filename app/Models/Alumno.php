@@ -106,7 +106,7 @@ class Alumno extends Model
     public function cursos()
     {
         return $this->belongsToMany('App\Models\Curso', 'alumno_curso', 'alumno_DNI', 'curso_id')
-        ->withPivot(['condition','inasistencias']);
+        ->withPivot(['condition','inasistencias','year','average']);
     }
 
     /**
