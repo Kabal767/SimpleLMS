@@ -25,7 +25,7 @@ Route::view('home', 'menus/mainMenu') ->middleware('auth');
 Route::resource('alumnos', App\Http\Controllers\AlumnoController::class) ->middleware('auth');
 Route::get('alumnos/{alumno}/toDos', [App\Http\Controllers\AlumnoController::class, 'toDos']) ->name ('alumnos.toDos') ->middleware('auth');
     Route::post('alumnos/{alumno}/toDos', [App\Http\Controllers\AlumnoController::class, 'addPending']) ->name('alumnos.addPending') ->middleware('auth');
-    Route::put('alumnos/{alumno}/{materia}', [App\Http\Controllers\AlumnoController::class, 'updateMateria']) ->name('alumnos.updateMateria') ->middleware('auth');
+    Route::put('alumnos/materia/{alumno}/{materia}', [App\Http\Controllers\AlumnoController::class, 'updateMateria']) ->name('alumnos.updateMateria') ->middleware('auth');
 Route::get('alumnos/{alumno}/family', [App\Http\Controllers\AlumnoController::class, 'family']) ->name ('alumnos.family') ->middleware('auth');
     Route::post('alumnos/{alumno}/family', [App\Http\Controllers\AlumnoController::class, 'addFamiliar']) ->name ('alumnos.addFamiliar') ->middleware('auth');
 
@@ -34,8 +34,9 @@ Route::get('alumnos/{alumno}/family', [App\Http\Controllers\AlumnoController::cl
     Route::delete('alumnos/{alumno}/evento/{evento}',[App\Http\Controllers\AlumnoController::class, 'eraseEvento']) ->name ('alumnos.eraseEvento') ->middleware('auth');
 
 Route::get('alumnos/{alumno}/promote',[App\Http\Controllers\AlumnoController::class, 'promotion']) ->name ('alumnos.promotion') ->middleware('auth');
-    Route::post('alumnos/{alumno}/promotion', [App\Http\Controllers\AlumnoController::class, 'promoteAlumno']) ->name ('alumnos.promoteAlumno') ->middleware('auth');
-    Route::post('alumnos/{alumno}/repeat', [App\Http\Controllers\AlumnoController::class, 'repeatAlumno']) ->name ('alumnos.repeatAlumno') ->middleware('auth');
+    Route::put('alumnos/promotion/{alumno}', [App\Http\Controllers\AlumnoController::class, 'promoteAlumno']) ->name ('alumnos.promoteAlumno') ->middleware('auth');
+    Route::put('alumnos/repeat/{alumno}', [App\Http\Controllers\AlumnoController::class, 'repeatAlumno']) ->name ('alumnos.repeatAlumno') ->middleware('auth');
+    Route::put('alumnos/reassign/{alumno}', [App\Http\Controllers\AlumnoController::class, 'reassignAlumno']) ->name ('alumnos.reassignAlumno') ->middleware('auth');
 
 //Rutas de exámenes
 Route::resource('exams', App\Http\Controllers\ExamController::class);

@@ -31,6 +31,7 @@
                 </div>
 
                 @foreach($alumnos as $alumno)
+                <!-- Repetir MODAL -->
                 <div class="modal fade" id="repeat{{$alumno->DNI}}" tabindex="-1" aria-labelledby="repeat{{$alumno->DNI}}Label" aria-hidden="true">
                     <div class="modal-dialog modal-lg">
                       <div class="modal-content">
@@ -67,6 +68,7 @@
 
                             <div class="col-6 text-end">
                                 <form method="POST" action="{{route('alumnos.repeatAlumno', $alumno)}}">
+                                {{ method_field('PUT') }}
                                 @csrf
                                 <button type="submit" class="btn btn-primary btn-lg me-md-2"> Confirmar </button>
                                 </form>
@@ -75,6 +77,46 @@
                         </div>
 
                       </div>
+                    </div>
+                </div>
+
+                <!-- Reasignar MODAL -->
+                <div class="modal fade" id="reassign{{$alumno->DNI}}" tabindex="1" aria-labelledby="reassign{{$alumno->DNI}}Label" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                        <form method="POST" action="{{route('alumnos.reassignAlumno', $alumno)}}">
+                        {{ method_field('PUT') }}
+                        @csrf
+  
+                          <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="exampleModalLabel"> Reasignar alumno: {{$alumno->name}} {{$alumno->lastName}} </h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                          </div>
+
+                          <div class="modal-body">
+                            Esta acción reasignará al alumno a un nuevo curso de igual grado, también modificará el origen de sus materias en curso para coincidir
+                            con el nuevo curso asignado. 
+                            <br><br><strong> ESTA ACCIÓN ES REVERSIBLE </strong>
+                          </div>
+
+                          <div class="modal-footer">
+                            <div class="input-group">
+                                <span class="input-group-text"> Curso </span>
+                                <select class="form-select" name="id_curso" id="id_curso">
+                                    <option selected> Escoger curso </option>
+                                    @foreach($cursos->where('curso',$alumno->curso->curso)->where('id', '<>', $alumno->curso->id) as $curso)
+                                    <option value="{{$curso->id}}"> {{$curso->curso}}° {{$curso->div}} - Turno {{$curso->turno}} </option>
+                                    @endforeach
+                                </select>
+                            </div>
+                          </div>
+
+                          <div class="modal-footer">                            
+                            <button type="submit" class="btn btn-primary btn-lg me-md-2"> Confirmar </button>
+                          </div>
+
+                        </form>
+                        </div>
                     </div>
                 </div>
                 @endforeach

@@ -33,7 +33,7 @@
                 <th scope="col" role="button" wire:click="order('nation')"> Nacionalidad</th>
                 <th scope="col" role="button" wire:click="order('tel')"> Teléfono </th>
                 <th scope="col" role="button" wire:click="order('direction')"> Domicilio </th>
-                <th scope="col" colspan="6"> Acciones </th>
+                <th scope="col" colspan="4"> Acciones </th>
               </tr>
             </thead>
             <tbody>
@@ -48,16 +48,26 @@
                     <td> {{$alumno->tel}} </td>
                     <td> {{$alumno->direction}} </td>
                     <td> <a class="btn btn-primary" href="{{route('alumnos.show', $alumno->DNI)}}"> Detalles </a></td>                  
-                    <td> <a class="btn btn-primary" href="{{route('alumnos.edit', $alumno->DNI)}}"> Modificar </a></td>      
-                    <td> <a class="btn btn-primary" href="{{route('alumnos.promotion', $alumno->DNI)}}"> Promocionar </td>     
-                    <td> <a class="btn btn-primary" href="{{route('alumnos.promotion', $alumno->DNI)}}"> Egresar </td>         
-                      <td> <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#repeat{{$alumno->DNI}}"> Repetir </button> </td>           
+                    <td> <a class="btn btn-primary" href="{{route('alumnos.edit', $alumno->DNI)}}"> Modificar </a></td>         
                     <td>
                       <form action="{{ route('alumnos.destroy', $alumno) }}" method="POST">
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="btn btn-danger"> Borrar </button>
                       </form>
+                    </td>
+                    <td>
+                      <div class="dropdown">
+                        <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                          Opciones Académicas
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-dark">
+                          <li> <button class="dropdown-item" data-bs-toggle="modal" data-bs-target="#repeat{{$alumno->DNI}}"> Repetir </button> </li>
+                          <li> <button class="dropdown-item" data-bs-toggle="modal" data-bs-target="#reassign{{$alumno->DNI}}"> Reasignar </button> </li>
+                          <li> <a class="dropdown-item" href="{{route('alumnos.promotion', $alumno->DNI)}}"> Promocionar </a> </li>
+                          <li> <a class="dropdown-item" href="{{route('alumnos.promotion', $alumno->DNI)}}"> Egresar </a></li>
+                        </ul>
+                      </div>
                     </td>
                     
                 </tr>

@@ -3,6 +3,7 @@
     <div class="card card-default m-4">
 
         <form method="POST" action="{{ route('alumnos.promoteAlumno',$alumno->DNI) }}"  role="form" enctype="multipart/form-data">
+            {{ method_field('PUT') }}
             @csrf
             
             <div class="card-header">

@@ -186,6 +186,7 @@ class AlumnoController extends Controller
     }
 
     public function updateMateria(Request $request, Alumno $alumno, $materia){
+
         $average = ($request->q1 + $request->q2 + $request->q3) / 3;
 
         $alumno->materias()->updateExistingPivot($materia, ['quarter1' => $request->q1, 'quarter2' => $request->q2, 'quarter3' => $request->q3, 
@@ -324,6 +325,19 @@ class AlumnoController extends Controller
         foreach($curso->materias as $materia){
             $alumno->materias()->attach($materia->id, ['year' => $year, 'condition' => 'Cursando', 'origin' => $curso->id]);
         }
+    }
 
+    public function reassignAlumno(Request $request, Alumno $alumno){
+
+        $alumno->cursos()->updateExistingPivot($alumno->id_curso, ['curso_id' => $request->id_curso]);
+
+        $alumno->update(['id_curso' => $request->id_curso]);
+
+        foreach($alumno->materias()->where('condition', 'Cursando')->get() as $materia){
+            $alumno->materias()->updateExistingPivot($materia->id, ['origin' => $request->id_curso]);
+        }
+
+        return redirect()->route('alumnos.index')
+            ->with('success', 'Alumno reasignado exitósamente');
     }
 } 
