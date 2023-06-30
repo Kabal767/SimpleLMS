@@ -49,28 +49,25 @@
                     <form method="POST" action="{{ route('alumnos.addPending', $alumno->DNI) }}"  role="form" enctype="multipart/form-data">
                         @csrf
 
-                        <div class="row g-3 align-items-center">
-                            <div class="col-auto">
-                                <label for="materia_id" class="col-form-label">Materia</label>
-                            </div>
-                            <div class="col-auto">
+                        <div class="col-6 ms-3">
+                            <div class="input-group">
+
+                                <span class="input-group-text"> Materia </span>
                                 <select class="form-select" id="materia_id" name="materia_id" aria-label="materia_id" required>
                                     <option value="" selected> Seleccione una materia </option>
                                     @foreach($materias as $materia)
                                         <option value="{{$materia->id}}"> {{$materia->name}} </option>
                                     @endforeach
                                 </select>
-                            </div>
-                            <div class="col-auto">
-                                <label for="date" class="col-form-label">Año de cursado "(AA-MM-DD)"</label>
-                            </div>
-                            <div class="col-auto">
-                                <input type="text" id="date" name="date" class="form-control" value="{{$date}}" aria-label="date" >
-                            </div>
-                            <div class="col-auto">
+                                
+                                <span class="input-group-text"> Año de cursado </span>
+                                <input type="number" id="date" name="date" class="form-control" value="{{$year}}" aria-label="date" >
+                                
                                 <button type="submit" class="btn btn-primary"> Añadir materia </button>
+
                             </div>
                         </div>
+
                     </form>
                     
                     @livewire('to-dos-list', ['materias' => $alumno->materias, 'cursos' => $alumno->cursos, 'alumno' => $alumno])

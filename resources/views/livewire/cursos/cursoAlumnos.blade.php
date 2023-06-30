@@ -11,6 +11,9 @@
                 @endforeach
             </select>
 
+            {{$selectedYear}}
+            {{$curso->id}}
+
             <span class="input-group-text"> DNI/Nombre/Apellido </span>
             <input type="text" class="form-control" wire:model="searchInput" placeholder="DNI/Nombre/Apellido">
 
@@ -33,7 +36,7 @@
 
             </thead>
             <tbody>
-                @foreach($curso->alumnos as $alumno)
+                @foreach($shownAlumnos as $alumno)
                 <tr>
                     <th> {{$alumno->DNI}} </th>
                     <td> {{$alumno->name}} </td>

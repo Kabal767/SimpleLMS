@@ -139,13 +139,12 @@ class AlumnoController extends Controller
         $materias = Materia::All();
         $curso = Curso::findorFail($alumno->id_curso);
 
-        $year = Carbon::Now();
-        $date = date('y', strtotime($year));
+        $year = Carbon::Now()->format('Y');
 
         //Exam querys
         //$finalQuery = DB::('alumno_exam')->where('')
 
-        return view('alumno.toDos', compact('alumno', 'materias', 'year', 'date', 'curso'));
+        return view('alumno.toDos', compact('alumno', 'materias', 'year', 'curso'));
     }
 
     /**
