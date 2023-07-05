@@ -15,7 +15,7 @@
                     <option value="Adeudada"> Adeudada </option>
                 </select>
 
-                @if($selectedCondition == 'Final' || $selectedCondition == 'Diciembre')
+                @if($selectedCondition == 'Final')
                 <span class="input-group-text"> Curso </span>
                 <select class="form-select" name="id_curso" id="id_curso" wire:model="selectedCurso">
                     <option selected> Escoger curso </option>

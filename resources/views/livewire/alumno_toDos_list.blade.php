@@ -90,7 +90,7 @@
                         <td>{{$exam->pivot->written}}</td>
                         @endif
                     <td> {{$materia->pivot->callification}} </td>
-                    <td> <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal{{$materia->id}}"> Modificar </button> </td>
+                    <td> <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal{{$materia->id}}" @if($materia->pivot->condition == 'Aprobada') disabled @endif> Modificar </button> </td>
 
                     
 

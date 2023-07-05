@@ -2,6 +2,12 @@ Este documento contiene los pasos inmediatos a seguir con el desarrollo del proy
 
     1. Reasignar. X
     2. Reparar la lista de alumnos en la vista curso. [PENDIENTE]
-    2. Modificar la lógica y el formulario para añadir materias pendientes/adeudadas.
-    3. Lógica para egresar alumnos.
-    4. Generación de PDFs.
+    3. Modificar la lógica y el formulario para añadir materias pendientes/adeudadas. X
+    4. Lógica para egresar alumnos. X
+    5. Modificar enum de condición en la relación alumno materia. X
+    6. Bloquear elementos de modificación. X/
+    7. Lógica para procesar exámenes y sus resultados. X
+    8. Bloquear exámenes de modificación. X
+    9. Abandono del alumno. 
+    10. Reintegro del alumno.
+    9. Generación de PDFs.

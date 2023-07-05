@@ -50,10 +50,12 @@
                 <tr>
                     <th> ID </th>
                     <th> Fecha </th>
+                    <th> Estado </th>
                     <th> Condición </th>
                     <th> Curso </th>
                     <th> Materia </th>
-                    <th colspan="2"> Acciones </th>
+                    <th> Alumnos </th>
+                    <th colspan="3"> Acciones </th>
                 </tr>
             </thead>
             <tbody>
@@ -61,7 +63,8 @@
                 @foreach($exams as $exam)
                 <tr>
                     <th> {{$exam->id}} </th>
-                    <td> {{$exam->mesas()->first()->Date}}</td>
+                    <th> {{$exam->mesas()->first()->Date}}</th>
+                    <th> {{$exam->state}} </th>
                     <td> {{$exam->condition}} </td>
                     <td> 
                     @if($exam->curso == NULL)
@@ -71,12 +74,14 @@
                     @endif 
                     </td>
                     <td> {{$exam->materia->name}} </td>
+                    <td> {{$exam->alumnos->count()}} </td>
                     <td> <a class="btn btn-primary" href="{{route('exams.showMesas', $exam->id)}}"> Detalles </a> </td>
+                    <td> <a class="btn btn-primary @if($exam->state == 'Cerrado') disabled @endif" href="{{route('exams.close', $exam->id)}}"> Cerrar examen </a> </td>
                     <td>
                         <form action="{{ route('exams.destroy', $exam->id) }}" method="POST">
                           @csrf
                           @method('DELETE')
-                          <button type="submit" class="btn btn-danger"> Borrar </button>
+                          <button type="submit" class="btn btn-danger" @if($exam->state == 'Cerrado') disabled @endif> Borrar </button>
                         </form>
                     </td>
                 </tr>

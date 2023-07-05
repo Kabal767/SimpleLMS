@@ -17,7 +17,7 @@ return new class extends Migration
             $table->bigIncrements('id');            
             $table->timestamps();
 
-            $table->enum('condition', ['cursando', 'promocionado']);
+            $table->enum('condition', ['Cursando', 'Promocionado']);
             $table->year('year');
             $table->integer('inasistencias')->unsigned()->default(0);
             $table->float('average')->unsigned()->default(0);

@@ -62,7 +62,7 @@ class AlumnoController extends Controller
         $year = Carbon::Now()->format('Y');
 
         //Attach curso to student
-        $alumno->cursos()->attach($curso, ['condition' => 'cursando', 'year' => $year]);
+        $alumno->cursos()->attach($curso, ['condition' => 'Cursando', 'year' => $year]);
 
         //Attach curso materias to student
         foreach($curso->materias as $materia){
@@ -156,7 +156,7 @@ class AlumnoController extends Controller
      */
     public function addPending(Request $request, Alumno $alumno)
     {
-        $alumno->materias()->syncWithoutDetaching([$request->materia_id => ['year' => $request->date, 'condition' => 'Pendiente', 'origin' => 'pending']]);
+        $alumno->materias()->syncWithoutDetaching([$request->materia_id => ['year' => $request->date, 'condition' => 'En Proceso', 'origin' => 'pending']]);
         
         return redirect()->route('alumnos.toDos', ['alumno'=>$alumno->DNI])
             ->with('success', 'Materia pendiente añadida correctamente');
@@ -292,10 +292,19 @@ class AlumnoController extends Controller
         return redirect()->route('alumnos.toDos', ['alumno' => $alumno->DNI]);
     }
 
+    public function egreso(Alumno $alumno){
+        
+        return view('alumno.egress', compact('alumno'));
+    }
+
     public function egressAlumno(Request $request, Alumno $alumno){
 
         $this->closeMaterias($alumno, $request->neededNote);
 
+        $alumno->update(['condition' => 'Egresado']);
+
+        return redirect()->route('alumnos.index')
+            ->with('success', 'Alumno egresado exitósamente');
     }
 
     public function closeMaterias(Alumno $alumno, $neededNote){
@@ -307,7 +316,7 @@ class AlumnoController extends Controller
                 $alumno->materias()->updateExistingPivot($materia->id, ['condition' => 'Aprobada', 'callification' => $materia->pivot->average]);
             }
             else{
-                $alumno->materias()->updateExistingPivot($materia->id, ['condition' => 'Pendiente']);
+                $alumno->materias()->updateExistingPivot($materia->id, ['condition' => 'En Proceso']);
             }
         }
 
@@ -319,7 +328,7 @@ class AlumnoController extends Controller
 
         $year = Carbon::Now()->format('Y');
         
-        $alumno->cursos()->attach($curso, ['condition' => 'cursando', 'year' => $year]);
+        $alumno->cursos()->attach($curso, ['condition' => 'Cursando', 'year' => $year]);
 
         foreach($curso->materias as $materia){
             $alumno->materias()->attach($materia->id, ['year' => $year, 'condition' => 'Cursando', 'origin' => $curso->id]);

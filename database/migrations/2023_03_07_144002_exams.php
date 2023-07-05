@@ -20,6 +20,7 @@ return new class extends Migration
 
             //Datos de examen
             $table->enum('condition', ['Final', 'Diciembre', 'Regular', 'Adeudada'])->default('Final');
+            $table->enum('state', ['Abierto','Cerrado'])->default('Abierto');
 
             //Foreign data
             $table->bigInteger('materia_id')->unsigned();

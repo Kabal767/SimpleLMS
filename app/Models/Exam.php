@@ -13,6 +13,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property $condition
  * @property $materia_id
  * @property $curso_id
+ * @property $state
  *
  * @property Curso $curso
  * @property Materia $materia
@@ -36,7 +37,7 @@ class Exam extends Model
      *
      * @var array
      */
-    protected $fillable = ['condition','materia_id','curso_id'];
+    protected $fillable = ['condition','materia_id','curso_id','state'];
 
 
     /**
@@ -71,6 +72,6 @@ class Exam extends Model
     public function alumnos()
     {
         return $this->belongsToMany('App\Models\Alumno', 'alumno_exam', 'exam_id', 'alumno_DNI')
-        ->withPivot(['oral','written','callification','mesa_id', 'alumno_DNI','boolOral','boolWritten']);
+        ->withPivot(['oral','written','callification','mesa_id', 'alumno_DNI','boolOral','boolWritten','condition']);
     }
 }

@@ -28,7 +28,7 @@ class examForm extends Component
     public function render(){
 
         $curso = Curso::find($this->selectedCurso);
-        if($this->selectedCondition == 'Regular' || $this->selectedCondition == 'Adeudada'){$curso = NULL;}
+        if($this->selectedCondition == 'Regular' || $this->selectedCondition == 'Adeudada' || $this->selectedCondition == 'Diciembre'){$curso = NULL;}
         if($curso == NULL){$this->materias = Materia::All();}
         else{$this->materias = $curso->materias()->get();}
 

@@ -24,7 +24,7 @@ return new class extends Migration
             $table->integer('quarter3')->default(0);
             $table->integer('average')->default(0);
             $table->integer('callification')->default(0);
-            $table->enum('condition', ['Cursando', 'Pendiente', 'Aprobada'])->default('Cursando');
+            $table->enum('condition', ['Cursando', 'En Proceso', 'Aprobada'])->default('Cursando');
             $table->year('year');
 
             //Foreign keys

@@ -26,6 +26,7 @@
             <thead>
               <tr>
                 <th scope="col" role="button" wire:click="order('DNI')"> DNI </th>
+                <th scope="col" role="button" wire:click="order('condition')"> Condición </th>
                 <th scope="col" role="button" wire:click="order('name')"> Nombres </th>
                 <th scope="col" role="button" wire:click="order('lastName')"> Apellido </th>
                 <th scope="col"> Curso </th>
@@ -40,6 +41,7 @@
                 @foreach ($shownAlumnos as $alumno)
                 <tr>
                     <th> {{$alumno->DNI}} </th>
+                    <th> {{$alumno->condition}} </th>
                     <td> {{$alumno->name}} </td>
                     <td> {{$alumno->lastName}} </td>
                     <td> {{$alumno->curso->curso}}° {{$alumno->curso->div}} - Turno {{$alumno->curso->turno}} </td>
@@ -62,10 +64,17 @@
                           Opciones Académicas
                         </button>
                         <ul class="dropdown-menu dropdown-menu-dark">
-                          <li> <button class="dropdown-item" data-bs-toggle="modal" data-bs-target="#repeat{{$alumno->DNI}}"> Repetir </button> </li>
-                          <li> <button class="dropdown-item" data-bs-toggle="modal" data-bs-target="#reassign{{$alumno->DNI}}"> Reasignar </button> </li>
-                          <li> <a class="dropdown-item" href="{{route('alumnos.promotion', $alumno->DNI)}}"> Promocionar </a> </li>
-                          <li> <a class="dropdown-item" href="{{route('alumnos.promotion', $alumno->DNI)}}"> Egresar </a></li>
+                          <li> <button class="dropdown-item @if($alumno->condition != 'Cursando') disabled @endif" 
+                            data-bs-toggle="modal" data-bs-target="#repeat{{$alumno->DNI}}"> Repetir </button> </li>
+
+                          <li> <button class="dropdown-item @if($alumno->condition != 'Cursando') disabled @endif" 
+                            data-bs-toggle="modal" data-bs-target="#reassign{{$alumno->DNI}}"> Reasignar </button> </li>
+
+                          <li> <a class="dropdown-item @if($alumno->condition != 'Cursando') disabled @endif"
+                             href="{{route('alumnos.promotion', $alumno->DNI)}}"> Promocionar </a> </li>
+                             
+                          <li> <a class="dropdown-item @if($alumno->condition != 'Cursando') disabled @endif"
+                             href="{{route('alumnos.egreso', $alumno->DNI)}}"> Egresar </a> </li>
                         </ul>
                       </div>
                     </td>

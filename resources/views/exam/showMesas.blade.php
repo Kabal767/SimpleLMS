@@ -20,6 +20,7 @@
                 NAN
                 @endif
             </a>
+            <a class="btn @if($exam->state == 'Cerrado') btn-danger @else btn-primary @endif" href="#"> Estado: {{$exam->state}} </a>
         </div>
     </div>
 
@@ -49,7 +50,7 @@
                                     <form action="{{ route('exams.eraseMesa',[$exam->id, $mesa->id]) }}" method="POST">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="btn btn-danger"> Borrar </button>
+                                        <button type="submit" class="btn btn-danger" @if($exam->state == 'Cerrado') disabled @endif> Borrar </button>
                                     </form> 
                                 </td>
                             </tr>
@@ -60,7 +61,7 @@
                                     <td></td>
                                     <td> <input type="date" class="form-control" name="Date" id="Date"> </td>
                                     <td> <input type="text" class="form-control" name="Proffesor" id="Proffesor"></td>
-                                    <td colspan="2"> <button type="submit" class="btn btn-primary"> + </button> </td>
+                                    <td colspan="2"> <button type="submit" class="btn btn-primary" @if($exam->state == 'Cerrado') disabled @endif> + </button> </td>
                                 </form>
                             </tr>
                         </tbody>
@@ -80,6 +81,7 @@
                             <tr>
                                 <th colspan="2"> Nombre completo </th>
                                 <th> N° de Mesa </th>
+                                <th> Condición </th>
                                 <th> Oral</th>
                                 <th> Escrito </th>
                                 <th> Calificación final </th>
@@ -92,15 +94,17 @@
                                 <th scope="row"> {{$alumno->name}} </th>
                                 <th> {{$alumno->lastName}} </th>
                                 <td> N°{{$alumno->pivot->mesa_id}} </td>
+                                <td> {{$alumno->pivot->condition}} </td>
                                 <td> {{$alumno->pivot->oral}} </td>
                                 <td> {{$alumno->pivot->written}} </td>
                                 <td> {{$alumno->pivot->callification}}</td>
-                                <td> <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal{{$alumno->DNI}}"> Modificar </button> </td>
+                                <td> <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal{{$alumno->DNI}}"
+                                    @if($exam->state == 'Cerrado') disabled @endif> Modificar </button> </td>
                                 <td> 
                                     <form action="{{ route('exams.eraseAlumno',[$exam->id, $alumno->DNI]) }}" method="POST">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="btn btn-danger"> Borrar Alumno </button>
+                                    <button type="submit" class="btn btn-danger" @if($exam->state == 'Cerrado') disabled @endif> Borrar Alumno </button>
                                     </form>                                
                                
                                 <div class="modal fade" id="modal{{$alumno->DNI}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -176,7 +180,7 @@
                                     <td></td>
                                     <td></td>
                                     <td></td>
-                                    <td colspan="2"> <button type="submit" class="btn btn-primary"> + </button> </td>
+                                    <td colspan="2"> <button type="submit" class="btn btn-primary" @if($exam->state == 'Cerrado') disabled @endif> + </button> </td>
                                 </form>
                             </tr>
                         </tbody>

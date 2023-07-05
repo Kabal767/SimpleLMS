@@ -12,9 +12,9 @@
 
             <div class="card-body">
 
-                <div class="accordion" id="accordionExample">
+                <div class="accordion">
                     <div class="accordion-item">
-                      <h2 class="accordion-header" id="headingOne">
+                      <h2 class="accordion-header">
                         <button class="accordion-button btn-danger" type="button" data-bs-toggle="collapse" 
                         data-bs-target="#importantInfo" aria-expanded="true" aria-controls="importantInfo">
                           INFORMACIÓN IMPORTANTE!

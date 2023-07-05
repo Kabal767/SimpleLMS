@@ -53,6 +53,7 @@ return new class extends Migration
 
             //Curso [Foreign data]
             $table->bigInteger('id_curso')->unsigned();
+            $table->enum('condition', ['Cursando','Abandono','Egresado'])->default('Cursando');
 
             $table->primary('DNI');
 

@@ -38,14 +38,20 @@ Route::get('alumnos/{alumno}/promote',[App\Http\Controllers\AlumnoController::cl
     Route::put('alumnos/repeat/{alumno}', [App\Http\Controllers\AlumnoController::class, 'repeatAlumno']) ->name ('alumnos.repeatAlumno') ->middleware('auth');
     Route::put('alumnos/reassign/{alumno}', [App\Http\Controllers\AlumnoController::class, 'reassignAlumno']) ->name ('alumnos.reassignAlumno') ->middleware('auth');
 
+Route::get('alumnos/egress/{alumno}', [App\Http\Controllers\AlumnoController::class, 'egreso']) ->name ('alumnos.egreso') ->middleware('auth');
+    Route::put('alumnos/egress/{alumno}', [App\Http\Controllers\AlumnoController::class, 'egressAlumno']) ->name ('alumnos.egressAlumno') ->middleware('auth');
+
 //Rutas de exámenes
 Route::resource('exams', App\Http\Controllers\ExamController::class);
 Route::get('exams/{exam}/mesas', [App\Http\Controllers\ExamController::class, 'showMesas']) -> name('exams.showMesas') ->middleware('auth');
-    Route::post('exams/{exam}/mesas', [App\Http\Controllers\ExamController::class, 'addMesa']) -> name('exams.addMesa') ->middleware('auth');    
-    Route::delete('exams/{exam}/mesas/{mesa}', [App\Http\Controllers\ExamController::class, 'eraseMesa']) -> name('exams.eraseMesa') ->middleware('auth');
-    Route::post('exams/{exam}/alumnos', [App\Http\Controllers\ExamController::class, 'addAlumno']) -> name('exams.addAlumno') ->middleware('auth');
-    Route::put('exams/{exam}/{alumno}', [App\Http\Controllers\ExamController::class, 'updateAlumno']) -> name('exams.updateAlumno') ->middleware('auth');
-    Route::delete('exams/{exam}/alumnos/{alumno}', [App\Http\Controllers\ExamController::class, 'eraseAlumno']) -> name('exams.eraseAlumno') ->middleware('auth');
+    Route::post('exams/mesas/{exam}/mesas', [App\Http\Controllers\ExamController::class, 'addMesa']) -> name('exams.addMesa') ->middleware('auth');    
+    Route::delete('exams/mesas/{exam}/mesas/{mesa}', [App\Http\Controllers\ExamController::class, 'eraseMesa']) -> name('exams.eraseMesa') ->middleware('auth');
+    Route::post('exams/mesas/{exam}/alumnos', [App\Http\Controllers\ExamController::class, 'addAlumno']) -> name('exams.addAlumno') ->middleware('auth');
+    Route::put('exams/mesas/{exam}/{alumno}', [App\Http\Controllers\ExamController::class, 'updateAlumno']) -> name('exams.updateAlumno') ->middleware('auth');
+    Route::delete('exams/mesas/{exam}/alumnos/{alumno}', [App\Http\Controllers\ExamController::class, 'eraseAlumno']) -> name('exams.eraseAlumno') ->middleware('auth');
+
+Route::get('exams/close/{exam}', [App\Http\Controllers\ExamController::class, 'close']) -> name('exams.close') ->middleware('auth');
+    Route::put('exams/close/{exam}', [App\Http\Controllers\ExamController::class, 'closeExam']) -> name('exams.closeExam') ->middleware('auth');
 
 
 //Rutas de materias

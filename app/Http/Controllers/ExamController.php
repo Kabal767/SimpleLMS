@@ -62,7 +62,7 @@ class ExamController extends Controller
         $mesa = $exam->mesas()->create(['Date' => $request->Date, 'Proffesor' => $request->Proffesor]);
 
         if($exam->condition == 'Final'){
-            $alumnos = Alumno::where('id_curso', $exam->curso_id)->get();
+            $alumnos = Alumno::where('id_curso', $exam->curso_id)->where('condition','Cursando')->get();
 
             foreach($alumnos as $alumno){
                 $exam->alumnos()->attach($alumno->DNI, ['mesa_id' => $mesa->id, 'boolOral' => true, 'boolWritten' => true]);
@@ -131,14 +131,14 @@ class ExamController extends Controller
 
     public function showMesas(Exam $exam)
     {
-        if($exam->condition == 'Regular' || $exam->condition == 'Adeudada'){
-            $relations = DB::table('alumno_materia')->where('materia_id', $exam->materia_id);
+        if($exam->condition == 'Regular' || $exam->condition == 'Adeudada' || $exam->condition == 'Diciembre'){
+            $relations = DB::table('alumno_materia')->where('materia_id', $exam->materia_id)->where('condition','En Proceso');
 
             $alumnos = Alumno::whereExists($relations)->get();
         }
 
-        if($exam->condition == 'Final' || $exam->condition == 'Diciembre'){
-            $relations = DB::table('alumno_materia')->where('materia_id', $exam->materia_id);
+        if($exam->condition == 'Final'){
+            $relations = DB::table('alumno_materia')->where('materia_id', $exam->materia_id)->where('condition','Cursando');
 
             $alumnos = Alumno::where('id_curso', $exam->curso_id)->whereExists($relations)->get();
         }
@@ -180,5 +180,37 @@ class ExamController extends Controller
         'written' => $request->written, 'callification' => $request->callification]);
 
         return redirect()->route('exams.showMesas', ['exam'=>$exam->id]);
+    }
+
+    public function close(Exam $exam){
+        
+        return view('exam.close', compact('exam'));
+    }
+
+    public function closeExam(Request $request, Exam $exam){
+
+        foreach($exam->alumnos as $alumno){
+
+            if($alumno->pivot->callification >= $request->selectedNote){
+
+                $exam->alumnos()->updateExistingPivot($alumno->DNI, ['condition' => 'Aprobado']);
+
+                if($exam->condition !== 'Final'){
+                    $alumno->materias()->updateExistingPivot($exam->materia_id, ['callification' => $alumno->pivot->callification,
+                    'condition' => 'Aprobada']);
+                }
+
+            }
+            else{                
+                $exam->alumnos()->updateExistingPivot($alumno->DNI, ['condition' => 'Desaprobado']);
+            }
+
+        }
+
+        $exam->update(['state' => 'Cerrado']);
+
+        return redirect()->route('exams.showMesas', ['exam'=>$exam->id])
+        ->with('Examen cerrado exitósamente');
+
     }
 }

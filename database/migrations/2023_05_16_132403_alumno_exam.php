@@ -22,6 +22,7 @@ return new class extends Migration
             $table->boolean('boolWritten');
             $table->integer('written')->default(0);
             $table->integer('callification')->default(0);
+            $table->enum('condition', ['Cursando','Aprobado','Desaprobado'])->default('Cursando');
 
             $table->bigInteger('mesa_id')->unsigned();
             $table->bigInteger('alumno_DNI')->unsigned();

@@ -18,6 +18,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property $origin
  * @property $nation
  * @property $id_curso
+ * @property $condition
  *
  * @property Curso $curso
  * @package App
@@ -44,6 +45,7 @@ class Alumno extends Model
 		'nation' => 'required',
 
 		'id_curso' => 'required',
+    'condition' => 'required',
     ];
 
     protected $perPage = 20;
@@ -59,7 +61,7 @@ class Alumno extends Model
     'birthNation','birthJurisdiction','birthDepartment','birthLocality',
     'origin','lastYear','originNation','originJurisdiction','originDepartment','originLocality','originDirection',
     'nation',
-    'id_curso'];
+    'id_curso','condition'];
 
 
     /**
