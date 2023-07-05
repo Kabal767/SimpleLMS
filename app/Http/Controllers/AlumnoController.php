@@ -10,6 +10,7 @@ use App\Models\Evento;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 Use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\AlumnoFormRequest;
 
 /**
@@ -361,5 +362,42 @@ class AlumnoController extends Controller
 
         return redirect()->route('alumnos.index')
             ->with('success', 'Alumno marcado por abandono exitósamente');
+    }
+
+    public function reingress(Alumno $alumno){
+        
+        $cursos = Curso::where('curso', '>=' ,$alumno->curso->curso)->get();
+
+        return view('alumno.reingress', compact('alumno','cursos'));
+    }
+
+    public function reingressAlumno(Request $request, Alumno $alumno){
+        
+        $user = Auth::user()->name;
+
+        //Detach al current materias
+        foreach($alumno->materias()->where('condition','Cursando')->get() as $materia)
+        {
+            $alumno->materias()->detach($materia->id);
+        }
+
+        //Crear evento de reingreso en el alumno        
+        $today = Carbon::Now()->format('Y-m-d');   
+        $now = Carbon::Now()->format('H:i:s');
+        $curso = Curso::FindOrFail($request->id_curso);
+
+        $alumno->eventos()->create(['user' => $user,
+        'type' => 'Reingreso', 'date' => $today, 'hour' => $now,
+        'description' => 'El alumno ' . $alumno->name . ' ' . $alumno->lastName . ' reingresó a la Escuela Comercio N°13, integrándose a ' . $curso->id . '° ' . $curso->div . ' Turno ' . 
+        $curso->turno . ' para continuar su cursado.']);
+
+        //Remove old curso and get the new one
+        $alumno->cursos()->detach($alumno->id_curso);
+        $alumno->update(['condition' => 'Cursando', 'id_curso' => $request->id_curso]);
+        $this->openMaterias($alumno, $request->id_curso);
+
+        return redirect()->route('alumnos.toDos', ['alumno'=>$alumno->DNI])
+            ->with('success', 'Alumno created successfully.');
+
     }
 } 

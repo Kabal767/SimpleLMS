@@ -78,6 +78,9 @@
 
                           <li> <button class="dropdown-item @if($alumno->condition != 'Cursando') disabled @endif" 
                           data-bs-toggle="modal" data-bs-target="#abandon{{$alumno->DNI}}"> Abandono </button> </li>
+
+                          <li> <a class="dropdown-item @if($alumno->condition != 'Abandono') disabled @endif"
+                            href="{{route('alumnos.reingress', $alumno->DNI)}}"> Reingresar </a> </li>
                         </ul>
                       </div>
                     </td>

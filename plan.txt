@@ -8,6 +8,21 @@ Este documento contiene los pasos inmediatos a seguir con el desarrollo del proy
     6. Bloquear elementos de modificación. X/
     7. Lógica para procesar exámenes y sus resultados. X
     8. Bloquear exámenes de modificación. X
-    9. Abandono del alumno. 
-    10. Reintegro del alumno.
-    9. Generación de PDFs.
+    9. Abandono del alumno. X
+    10. Reingreso del alumno. X
+        a. Poner el alumno en cursando.
+        b. Asignar nuevo curso y/o división.
+        c. Asignar nuevas materias. 
+        d. Crear evento de reingreso.
+    11. Bloquear acceso de modificación. 
+    12. Generación de PDFs.
+    13. Lista de usuarios.
+    14. Registro de todos los eventos por usuario.
+    15. Modificar navbar para acceso rápido a los elementos importantes.
+    16. Revisar mensajes de error.
+    17. Protección a nivel controller para las acciones no permitidas según estado del objeto.
+    18. Mostrar conteo de materias pendientes en lugar de curso para alumnos egresados.
+    19. Codificar por color los promedios de los alumnos.
+    20. Repetir y abandono deberían tener una tabla con las notas trimestrales.
+
+    Tri = Trimestre

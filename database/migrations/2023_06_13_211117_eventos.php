@@ -19,7 +19,7 @@ return new class extends Migration
 
             $table->string('user');
             $table->text('description')->nullable();
-            $table->enum('type',['Falta de conducta','Inasistencia','Retiro']);
+            $table->enum('type',['Falta de conducta','Inasistencia','Retiro','Abandono','Ingreso','Ingreso con pase','Reingreso']);
             $table->date('date');
             $table->time('hour');
             $table->string('file')->nullable();
