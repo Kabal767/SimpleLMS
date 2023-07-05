@@ -9,6 +9,14 @@
         <div class="row">
             <div class="col-md-12">
 
+                @if($errors->any())
+                    @foreach($errors->all() as $error)
+                    <div class="alert alert-danger" role="alert">
+                        {{$error}}
+                    </div>
+                    @endforeach
+                @endif
+
                 @includeif('partials.errors')
 
                 <div class="card card-default m-4">
@@ -40,12 +48,12 @@
 
                                         <div class="input-group mb-3">                                            
                                             <span class="input-group-text" id="basic-addon1"> *Nombre completo </span>
-                                            <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" id="name" placeholder="Nombres"
+                                            <input type="text" class="form-control @error('names') is-invalid @enderror" name="names" id="names" placeholder="Nombres"
                                             value="{{old('names')}}" required> 
                                             <input type="text" class="form-control @error('lastName') is-invalid @enderror" name="lastName" id="lastName" placeholder="Apellido"
                                             value="{{old('lastName')}}" required>   
                                         </div>
-                                        @error('name')
+                                        @error('names')
                                             <div class="alert alert-danger">{{ $message }}</div>
                                         @enderror 
                                         @error('lastName')
@@ -58,6 +66,33 @@
                                             value="{{old('nation')}}" required> 
                                         </div>
                                         @error('nation')
+                                            <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror 
+
+                                        <div class="input-group mb-3">                                         
+                                            <span class="input-group-text" id="basic-addon1"> *Jurisdicción </span>                                            
+                                            <input type="text" class="form-control @error('jurisdiction') is-invalid @enderror" name="jurisdiction" id="jurisdiction" placeholder="Jurisdicción"
+                                            value="{{old('jurisdiction')}}" required> 
+                                        </div>
+                                        @error('jurisdiction')
+                                            <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror 
+
+                                        <div class="input-group mb-3">                                         
+                                            <span class="input-group-text" id="basic-addon1"> *Departamento </span>                                            
+                                            <input type="text" class="form-control @error('department') is-invalid @enderror" name="department" id="department" placeholder="Departamento"
+                                            value="{{old('department')}}" required> 
+                                        </div>
+                                        @error('department')
+                                            <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror 
+
+                                        <div class="input-group mb-3">                                         
+                                            <span class="input-group-text" id="basic-addon1"> *Localidad </span>                                            
+                                            <input type="text" class="form-control @error('locality') is-invalid @enderror" name="locality" id="locality" placeholder="Localidad"
+                                            value="{{old('locality')}}" required> 
+                                        </div>
+                                        @error('locality')
                                             <div class="alert alert-danger">{{ $message }}</div>
                                         @enderror 
 

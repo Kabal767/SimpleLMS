@@ -37,6 +37,8 @@ Route::get('alumnos/{alumno}/promote',[App\Http\Controllers\AlumnoController::cl
     Route::put('alumnos/promotion/{alumno}', [App\Http\Controllers\AlumnoController::class, 'promoteAlumno']) ->name ('alumnos.promoteAlumno') ->middleware('auth');
     Route::put('alumnos/repeat/{alumno}', [App\Http\Controllers\AlumnoController::class, 'repeatAlumno']) ->name ('alumnos.repeatAlumno') ->middleware('auth');
     Route::put('alumnos/reassign/{alumno}', [App\Http\Controllers\AlumnoController::class, 'reassignAlumno']) ->name ('alumnos.reassignAlumno') ->middleware('auth');
+    Route::put('alumnos/abandon/{alumno}', [App\Http\Controllers\AlumnoController::class, 'abandonAlumno']) ->name ('alumnos.abandonAlumno') ->middleware('auth');
+    
 
 Route::get('alumnos/egress/{alumno}', [App\Http\Controllers\AlumnoController::class, 'egreso']) ->name ('alumnos.egreso') ->middleware('auth');
     Route::put('alumnos/egress/{alumno}', [App\Http\Controllers\AlumnoController::class, 'egressAlumno']) ->name ('alumnos.egressAlumno') ->middleware('auth');

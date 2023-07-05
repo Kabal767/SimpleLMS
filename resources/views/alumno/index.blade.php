@@ -178,6 +178,47 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- Abandono MODAL-->
+                <div class="modal fade" id="abandon{{$alumno->DNI}}" tabindex="1" aria-labelledby="abandon{{$alumno->DNI}}Label" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+
+                            <div class="modal-header">                                
+                                <h1 class="modal-title fs-5" id="exampleModalLabel"> Abandono de alumno: {{$alumno->name}} {{$alumno->lastName}} </h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+
+                            <div class="modal-body">
+                                <strong> Esta es la acción de abandono. </strong> Confirmar esta acción marcará al alumno por abandono y bloqueará la posibilidad de reasignarlo,
+                                egresarlo y promocionarlo; las notas de sus materias en cursado se bloquearán en cero y no se podrán modificar; sus inasistencias se regresarán a cero;
+                                tampoco se podrán registrar eventos a este alumno. 
+
+                                <br><br><strong> Esta acción es reversible solamente mediante la acción 'REINTEGRAR' </strong>
+                            </div>
+
+                            <div class="modal-body border-top">
+                                <ul class="list-group">
+                                    <li class="list-group-item fw-bold active"> Inasistencias {{$alumno->cursos()->where('curso_id', $alumno->id_curso)
+                                    ->first()->pivot->inasistencias}} </li>
+                                    <li class="list-group-item fw-bold active"> Materias que cursa el alumno </li>
+                                    @foreach($alumno->materias()->where('condition','Cursando')->get() as $materia)
+                                    <li class="list-group-item"> {{$materia->name}} : {{$materia->pivot->average}} </li>
+                                    @endforeach
+                                </ul>
+                            </div>
+
+                            <div class="modal-footer">   
+                                <form method="POST" action="{{route('alumnos.abandonAlumno', $alumno->DNI)}}">
+                                    {{ method_field('PUT') }}
+                                    @csrf                             
+                                    <button type="submit" class="btn btn-primary btn-lg me-md-2"> Confirmar </button>
+                                </form>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
                 @endforeach
             </div>
         </div>

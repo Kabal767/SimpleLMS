@@ -75,6 +75,9 @@
                              
                           <li> <a class="dropdown-item @if($alumno->condition != 'Cursando') disabled @endif"
                              href="{{route('alumnos.egreso', $alumno->DNI)}}"> Egresar </a> </li>
+
+                          <li> <button class="dropdown-item @if($alumno->condition != 'Cursando') disabled @endif" 
+                          data-bs-toggle="modal" data-bs-target="#abandon{{$alumno->DNI}}"> Abandono </button> </li>
                         </ul>
                       </div>
                     </td>

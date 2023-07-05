@@ -18,6 +18,9 @@ use Illuminate\Validation\Rule;
  *  @property $tel
  *  @property $direction
  *  @property $nation
+ *  @property $jurisdiction
+ *  @property $department
+ *  @property $locality
  *  @property $mail
  * 
  *  @package App
@@ -43,7 +46,7 @@ use Illuminate\Validation\Rule;
      *
      * @var array
      */
-    protected $fillable = ['DNI','names','lastName','tel','direction','nation','mail'];
+    protected $fillable = ['DNI','names','lastName','tel','direction','nation','mail','jurisdiction','department','locality'];
 
     /**
      * The roles that belong to the Familiar

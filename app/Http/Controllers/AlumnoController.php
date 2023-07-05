@@ -348,4 +348,18 @@ class AlumnoController extends Controller
         return redirect()->route('alumnos.index')
             ->with('success', 'Alumno reasignado exitósamente');
     }
+
+    public function abandonAlumno(Alumno $alumno){
+
+        $alumno->cursos()->updateExistingPivot($alumno->id_curso, ['inasistencias' => 0]);
+
+        foreach($alumno->materias()->where('origin', $alumno->id_curso)->where('condition','Cursando')->get() as $materia){
+            $alumno->materias()->updateExistingPivot($materia->id, ['quarter1' => 0, 'quarter2' => 0, 'quarter3' => 0, 'average' => 0]);
+        }
+
+        $alumno->update(['condition' => 'Abandono']);
+
+        return redirect()->route('alumnos.index')
+            ->with('success', 'Alumno marcado por abandono exitósamente');
+    }
 } 
