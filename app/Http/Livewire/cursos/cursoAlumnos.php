@@ -29,9 +29,10 @@ class cursoAlumnos extends Component
     public function render(){
         $relations = DB::table('alumno_curso')->where('year', $this->selectedYear)->where('curso_id',$this->curso->id);
 
-        $this->shownAlumnos = Alumno::whereExists($relations)->get();
+        //$this->shownAlumnos = Alumno::whereExists($relations)->get();
+        $this->shownAlumnos = $this->curso->alumnos()->where('year', $this->selectedYear)->get();
 
-        dd($this->shownAlumnos);
+        //dd($this->shownAlumnos);
 
         return view('livewire.cursos.cursoAlumnos');
     }

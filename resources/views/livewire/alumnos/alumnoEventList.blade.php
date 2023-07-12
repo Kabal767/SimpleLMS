@@ -10,7 +10,7 @@
             <input type="date" class="form-control" wire:model="afterDate">
             <span class="input-group-text"> Antes de: </span>
             <input type="date" class="form-control" wire:model="beforeDate">
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newEvent">
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newEvent" @if($alumno->condition != 'Cursando') disabled @endif>
                 Nuevo Evento
             </button>
         </div>
@@ -45,7 +45,7 @@
                             </button> 
                         </td>
                         <td>
-                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modify{{$event->id}}">
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modify{{$event->id}}" @if($alumno->condition != 'Cursando') disabled @endif>
                                 Modificar
                             </button>
                         </td>
@@ -53,7 +53,7 @@
                             <form action="{{ route('alumnos.eraseEvento', [$alumno->DNI,$event->id]) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="btn btn-danger"> Borrar </button>
+                                <button type="submit" class="btn btn-danger" @if($alumno->condition != 'Cursando') disabled @endif> Borrar </button>
                             </form>
                         </td>
                     </tr>

@@ -11,7 +11,8 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 Use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Requests\AlumnoFormRequest;
+use App\Http\Requests\AlumnoFormRequest; 
+use App\Traits\changeTrait;  
 
 /**
  * Class AlumnoController
@@ -19,6 +20,8 @@ use App\Http\Requests\AlumnoFormRequest;
  */
 class AlumnoController extends Controller
 {
+    use changeTrait;
+
     /**
      * Display a listing of the resource.
      *
@@ -69,6 +72,8 @@ class AlumnoController extends Controller
         foreach($curso->materias as $materia){
             $alumno->materias()->attach($materia->id, ['year' => $year, 'condition' => 'Cursando', 'origin' => $request['id_curso']]);
         }
+
+        $this->registerChange($alumno->DNI, 'Nuevo Alumno');
 
         return redirect()->route('alumnos.toDos', ['alumno'=>$alumno->DNI])
             ->with('success', 'Alumno created successfully.');

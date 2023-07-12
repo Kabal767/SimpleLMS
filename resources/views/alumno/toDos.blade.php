@@ -63,7 +63,7 @@
                                 <span class="input-group-text"> Año de cursado </span>
                                 <input type="number" id="date" name="date" class="form-control" value="{{$year}}" aria-label="date" >
                                 
-                                <button type="submit" class="btn btn-primary"> Añadir materia </button>
+                                <button type="submit" class="btn btn-primary" @if($alumno->condition != 'Cursando') disabled @endif> Añadir materia </button>
 
                             </div>
                         </div>

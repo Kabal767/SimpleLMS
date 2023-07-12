@@ -8,6 +8,7 @@ use App\Models\Alumno;
 use Illuminate\Http\Request;
 Use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
+use App\Traits\changeTrait;  
 
 /**
  * Class CursoController
@@ -15,6 +16,7 @@ use Illuminate\Support\Facades\DB;
  */
 class CursoController extends Controller
 {
+    use changeTrait;
     /**
      * Display a listing of the resource.
      *
@@ -38,6 +40,8 @@ class CursoController extends Controller
         $materias = Materia::all();
 
         $curso = new Curso();
+
+        
         return view('curso.create', compact('curso'), compact('materias'));
     }
 
@@ -53,6 +57,8 @@ class CursoController extends Controller
 
         $curso = Curso::create($request->all());
         $curso->materias()->sync($request->materias);
+
+        $this->registerChange($curso->id, 'Nuevo curso');
 
         return redirect()->route('cursos.index')
             ->with('success', 'Curso created successfully.');

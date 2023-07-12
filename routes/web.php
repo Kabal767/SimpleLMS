@@ -70,3 +70,16 @@ Route::resource('familiars', App\Http\Controllers\FamiliarController::class);
     Route::put('familiars/{familiar}/{alumno}', [App\Http\Controllers\FamiliarController::class, 'updateAlumno']) -> name ('familiars.updateAlumno') ->middleware('auth');
     Route::delete('familiars/{familiar}/{alumno}', [App\Http\Controllers\FamiliarController::class, 'detachAlumno']) -> name('familiars.detachAlumno') ->middleware('auth');
 
+//Rutas de PDFs
+Route::get('PDF/create', [App\Http\Controllers\PDFController::class, 'create']) -> name('PDF.create') ->middleware('auth');
+    Route::put('PDF/matriz/', [App\Http\Controllers\PDFController::class, 'matriz']) -> name ('PDF.matriz') ->middleware('auth');
+    Route::put('PDF/boletin/', [App\Http\Controllers\PDFController::class, 'boletin']) -> name ('PDF.boletin') ->middleware('auth');
+
+//Rutas de usuarios
+Route::get('Users/list', [App\Http\Controllers\ChanController::class, 'indexUser']) -> name('users.index') ->middleware('auth');
+Route::get('Users/show/{user}', [App\Http\Controllers\ChanController::class, 'showUser']) -> name('chans.showUser') ->middleware('auth');
+
+Route::get('Chans/list', [App\Http\Controllers\ChanController::class, 'indexChan']) -> name('chans.index') ->middleware('auth');
+
+
+

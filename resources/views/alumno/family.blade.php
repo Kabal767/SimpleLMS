@@ -70,7 +70,7 @@
                                 </select>
                             </div>
                             <div class="col-auto">
-                                <button type="submit" class="btn btn-primary"> Crear relación </button>
+                                <button type="submit" class="btn btn-primary" @if($alumno->condition != 'Cursando') disabled @endif> Crear relación </button>
                             </div>
                             <div class="col-auto">
                                 <a class="btn btn-primary" href="{{ route('familiars.create') }}"> {{ __('Nuevo Familiar') }} </a>   </div>

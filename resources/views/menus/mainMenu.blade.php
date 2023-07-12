@@ -25,10 +25,10 @@
                 <a class="btn btn-primary" href="{{ route('alumnos.create') }}"> <h4>{{ __('Nuevo Alumno') }}</h4> </a>        </div>
             <div class="col-3">
                 <a class="btn btn-primary" href="{{ route('familiars.create') }}"> <h4>{{ __('Nuevo Familiar') }}</h4> </a>        </div>
-            
-            <!-- Nuevo examen -->
+
+                <!-- Lista de cursos -->
             <div class="col-6">
-                <a class="btn btn-primary" href="{{ route('exams.create') }}"> <h4>{{ __('Nuevo Exámen') }}</h4> </a>        </div>
+                <a class="btn btn-primary" href="{{ route('cursos.index') }}"> <h4>{{ __('Lista de Cursos') }}</h4> </a>        </div>
         </div>
 
         <!-- Lower menu -->
@@ -37,17 +37,23 @@
             <div class="col-6">
                 <a class="btn btn-primary" href="{{ route('materias.index') }}"> <h4>{{ __('Lista de Materias') }}</h4> </a>        </div>
 
-            <!-- Lista de cursos -->
-            <div class="col-6">
-                <a class="btn btn-primary" href="{{ route('cursos.index') }}"> <h4>{{ __('Lista de Cursos') }}</h4> </a>        </div>
-
             <!-- Nueva materia -->
             <div class="col-6">
                 <a class="btn btn-primary" href="{{ route('materias.create') }}"> <h4>{{ __('Nueva Materia') }}</h4> </a>        </div>
-            
-            <!-- Nuevo curso -->
+
             <div class="col-6">
-                <a class="btn btn-primary" href="{{ route('cursos.create') }}"> <h4>{{ __('Nuevo Curso') }}</h4> </a>        </div>
+            </div>
+
+            <div class="col-6">
+                <a class="btn btn-primary" href="{{ route('PDF.create') }}"> <h4>{{ __('Generar documento') }}</h4> </a>
+            </div>
+
+            <div class="col-6">
+            </div>
+
+            <div class="col-6">
+                <a class="btn btn-primary" href="{{ route('users.index') }}"> <h4>{{ __('Lista de usuarios') }}</h4> </a>
+            </div>
         </div>
     </div>
 
